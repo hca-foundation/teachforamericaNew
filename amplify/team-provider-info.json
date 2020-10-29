@@ -1,0 +1,15 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-teachforamerica-prod-85715-authRole",
+            "UnauthRoleArn": "arn:aws:iam::702995879190:role/amplify-teachforamerica-prod-85715-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::702995879190:role/amplify-teachforamerica-prod-85715-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-teachforamerica-prod-85715-deployment",
+            "UnauthRoleName": "amplify-teachforamerica-prod-85715-unauthRole",
+            "StackName": "amplify-teachforamerica-prod-85715",
+            "StackId": "arn:aws:cloudformation:us-east-1:702995879190:stack/amplify-teachforamerica-prod-85715/a786c3f0-19ee-11eb-9add-0e353767367b",
+            "AmplifyAppId": "d1ncdcmu5mwj32"
+        }
+    }
+}
