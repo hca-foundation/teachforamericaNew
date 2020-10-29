@@ -1,0 +1,17 @@
+type Student @model {
+  id: ID!
+  parentFirstName: String
+  parentLastName: String
+  phoneNumber: String
+  email: String
+  primaryLanguage: String
+  relationship: String
+  studentFirstName: String
+  studentLastName: String
+  studentBirthday: String
+  studentGender: String
+  studentRace: String
+  districtName: String
+  school: String
+  description: String
+}
