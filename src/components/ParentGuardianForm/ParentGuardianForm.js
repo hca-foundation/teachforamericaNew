@@ -111,25 +111,25 @@ const ParentGuardianForm = () => {
       <form>
         <h5>Parent/Guardian Information</h5>
         <div className="row">
-          <div class="form-group col-6">
-            <label for="formGroupExampleInput">Example label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+          <div className="form-group col-6">
+            <label htmlFor="parentGuardianFirstName">Parent/Guardian First Name</label>
+            <input type="text" className="form-control" id="parentGuardianFirstName" maxLength="50" required/>
           </div>
-          <div class="form-group col-6">
-            <label for="formGroupExampleInput2">Another label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" />
-          </div>
-        </div>
-        <div className="row">
-          <div class="form-group col-6">
-            <label for="formGroupExampleInput">Example label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+          <div className="form-group col-6">
+            <label htmlFor="parentGuardianLastName">Parent/Guardian Last Name</label>
+            <input type="text" className="form-control" id="parentGuardianLastName" maxLength="50" required/>
           </div>
         </div>
         <div className="row">
-          <div class="form-group col-12">
-            <label for="formGroupExampleInput">Example label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+          <div className="form-group col-6">
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input type="tel" className="form-control" id="phoneNumber" placeholder="(xxx)xxx-xxxx" maxLength="10" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="form-group col-12">
+            <label htmlFor="email">Email (optional)</label>
+            <input type="email" className="form-control" id="email" maxLength="100" />
           </div>
         </div>
       </form>

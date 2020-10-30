@@ -15,34 +15,35 @@ const SelfDeclarationForm = () => (
         <form>
             <div className="row">
                 <div class="form-group col-12">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+                    <label for="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
+                    <input type="text" class="form-control" id="participatingStudentNames" maxLength="100" />
                 </div>
                 <div class="form-group col-12">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+                    <label for="participatingStudentAddress">Participating Student(s) Address (optional)</label>
+                    <input type="text" class="form-control" id="participatingStudentAddress" maxLength="100" />
                 </div>
             </div>
             <div className="row">
                 <div class="form-group col-6">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
+                    <label for="householdNumber">Number in Household (optional)</label>
+                    <select id="householdNumber" class="form-control">
+                        <option selected>Select number</option>
                         <option>...</option>
                     </select>
                 </div>
             </div>
             <div className="row">
                 <div class="form-group col-6">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
+                    <label for="grossIncome">Annual Gross Income (optional)</label>
+                    <select id="grossIncome" class="form-control">
+                        <option selected>Select number</option>
                         <option>...</option>
                     </select>
                 </div>
             </div>
             <div className="row mb-3">
-                <div className="col-12">
+                <div className="col-12 mt-2">
+                    <p>Please check all race or ethnicity categories that apply to your student (optional)</p>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
                         <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
@@ -96,12 +97,12 @@ const SelfDeclarationForm = () => (
             <div className="row mb-3">
                 <div className="col-12">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                        <label class="form-check-label" for="inlineRadio1">I consent</label>
+                        <input class="form-check-input" type="radio" name="consent" id="consentTrue" value="true" />
+                        <label class="form-check-label" for="consentTrue">I consent</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                        <label class="form-check-label" for="inlineRadio2">I do not consent</label>
+                        <input class="form-check-input" type="radio" name="consent" id="consentFalse" value="false" />
+                        <label class="form-check-label" for="consentFalse">I do not consent</label>
                     </div>
                 </div>
             </div>
