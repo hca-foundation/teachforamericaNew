@@ -13,6 +13,7 @@ import {
   Button,
   Label,
   Input,
+  InputGroup,
   CustomInput,
   FormGroup,
   Table,
@@ -23,7 +24,7 @@ import {
 import { matchSorter } from "match-sorter";
 import classNames from "classnames";
 import "./StudentTable.scss";
-import { SortDown, SortUp, FilterCircle } from "react-bootstrap-icons";
+import { SortDown, SortUp } from "react-bootstrap-icons";
 
 // import sortasc from "./assets/sort_asc.png";
 // import sortdesc from "./assets/sort_desc.png";
@@ -134,7 +135,6 @@ const StudentTable = ({ columns, data, loading = true }) => {
           {headerGroups.map((headerGroup) => (
             <>
               <tr className="theader" {...headerGroup.getHeaderGroupProps()}>
-                <th>Select All</th>
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -206,16 +206,6 @@ const StudentTable = ({ columns, data, loading = true }) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
-                      <td>
-                        <InputGroup>
-                          <Input
-                            addon
-                            checked={false}
-                            type="checkbox"
-                            onChange={(e) => console.log("student")}
-                          />
-                        </InputGroup>
-                      </td>
                       {row.cells.map((cell) => {
                         return (
                           <td
