@@ -6,8 +6,10 @@ const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken) // esl
 //////////////
 //////////////
 module.exports.sendText = (event, context, callback) => {
-  const messenger = new Messenger(twilioClient)
-
+  const messenger = new Messenger(twilioClient, event.body)
+  console.log('context', context)
+  console.log('event', event)
+  //{ to: '+16154897861', message: 'From the application' },
   const response = {
     headers: { 'Access-Control-Allow-Origin': '*' }, // CORS requirement
     statusCode: 200
@@ -34,18 +36,3 @@ module.exports.sendText = (event, context, callback) => {
       callback(null, response)
     })
 }
-// callback(
-//   null,
-//   logo({
-//     name: 'Twilio Runtime',
-//     version: '1.0.0'
-//   }).render()
-// )
-// let twilio = new Twilio()
-// twilio.messages
-// .create({
-//   body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-//   from: '+15017122661',
-//   to: '+16154897891'
-// })
-//   .then(message => console.log(message.sid))
