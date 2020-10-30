@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import formData from '../../helpers/data/formData';
 
 import './StudentForm.scss';
 
-const StudentForm = () => (
+const StudentForm = () => {
+  const [states, setStates] = useState([]);
+  const [grades, setGrades] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const getData = () => {
+    const allStates = formData.getStates();
+    const allGrades = formData.getGrades();
+    setStates(allStates);
+    setGrades(allGrades);
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+    getData();
+    return () => setIsMounted(false);
+  });
+
+  return (
     <div className="StudentForm text-left py-4">
         <form>
             <h5>Student Information</h5>
@@ -36,8 +56,12 @@ const StudentForm = () => (
                 <div className="form-group col-6">
                     <label htmlFor="inputState">State</label>
                     <select id="inputState" className="form-control" required>
-                        <option value="" selected>Choose...</option>
-                        <option>...</option>
+                        <option value="" selected>Select state</option>
+                        {
+                            states.map((state, i) => (
+                                <option key={i} value={state.value}>{state.name}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
@@ -58,7 +82,11 @@ const StudentForm = () => (
                     <label htmlFor="inputGrade">Student's Current Grade</label>
                     <select id="inputGrade" className="form-control" required>
                         <option value="" selected>Select grade</option>
-                        <option>...</option>
+                        {
+                            grades.map((grade, i) => (
+                                <option key={i} value={grade.value}>{grade.value}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
@@ -172,6 +200,7 @@ const StudentForm = () => (
         </form>
 
     </div>
-);
+  );
+};
 
 export default StudentForm;
