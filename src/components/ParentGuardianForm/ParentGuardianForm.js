@@ -7,9 +7,9 @@ import './ParentGuardianForm.scss'
 
 const ParentGuardianForm = () => {
   const { dispatch, state } = useContext(GlobalStateContext);
-
   useEffect(() => {
-    dispatch(setFormDataAction(state.formData))
+    dispatch(setFormDataAction(state.formData));
+    console.log(state.formData);
   }, [dispatch, state.formData]);
 
   return (
@@ -17,27 +17,27 @@ const ParentGuardianForm = () => {
       <h5>Parent/Guardian Information</h5>
       <div className='row'>
         <div className='form-group col-6'>
-          <label htmlFor='parentGuardianFirstName'>
+          <label htmlFor='parentFirstName'>
             Parent/Guardian First Name
           </label>
           <input
-            value={state.formData.parentFirstName}
+            onChange={(e) => state.formData.parentFirstName = e.target.value}
             type='text'
             className='form-control'
-            id='parentGuardianFirstName'
+            id='parentFirstName'
             maxLength='50'
             required
           />
         </div>
         <div className='form-group col-6'>
-          <label htmlFor='parentGuardianLastName'>
+          <label htmlFor='parentLastName'>
             Parent/Guardian Last Name
           </label>
           <input
-            value={state.formData.parentLastName}
+            onChange={(e) => state.formData.parentLastName = e.target.value}
             type='text'
             className='form-control'
-            id='parentGuardianLastName'
+            id='parentLastName'
             maxLength='50'
             required
           />
@@ -47,7 +47,7 @@ const ParentGuardianForm = () => {
         <div className='form-group col-6'>
           <label htmlFor='phoneNumber'>Phone Number</label>
           <input
-            value={state.formData.phoneNumber}
+            onChange={(e) => state.formData.phoneNumber = e.target.value}
             type='tel'
             className='form-control'
             id='phoneNumber'
@@ -62,7 +62,7 @@ const ParentGuardianForm = () => {
         <div className='form-group col-12'>
           <label htmlFor='email'>Email (optional)</label>
           <input
-            value={state.formData.email}
+            onChange={(e) => state.formData.email = e.target.value}
             type='email'
             className='form-control'
             id='email'

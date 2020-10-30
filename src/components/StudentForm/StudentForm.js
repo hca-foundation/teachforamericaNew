@@ -10,7 +10,8 @@ const StudentForm = () => {
   const { dispatch, state } = useContext(GlobalStateContext);
 
   useEffect(() => {
-    dispatch(setFormDataAction(state.formData))
+    dispatch(setFormDataAction(state.formData));
+    console.log(state.formData);
   }, [dispatch, state.formData]);
 
   return (
@@ -21,7 +22,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="studentFirstName">Student First Name</label>
                 <input
-                    value={state.formData.studentFirstName}
+                    onChange={(e) => state.formData.studentFirstName = e.target.value}
                     type="text"
                     className="form-control"
                     id="studentFirstName"
@@ -32,7 +33,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="studentLastName">Student Last Name</label>
                 <input
-                    value={state.formData.studentLastName}
+                    onChange={(e) => state.formData.studentLastName = e.target.value}
                     type="text"
                     className="form-control"
                     id="studentLastName"
@@ -45,7 +46,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="address">Address</label>
                 <input
-                    value={state.formData.address}
+                    onChange={(e) => state.formData.address = e.target.value}
                     type="text"
                     className="form-control"
                     id="address"
@@ -58,7 +59,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="address2">Address 2 (optional)</label>
                 <input
-                    value={state.formData.address2}
+                    onChange={(e) => state.formData.address2 = e.target.value}
                     type="text"
                     className="form-control"
                     id="address2"
@@ -70,7 +71,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="city">City</label>
                 <input
-                    value={state.formData.city}
+                    onChange={(e) => state.formData.city = e.target.value}
                     type="text"
                     className="form-control"
                     id="city"
@@ -81,7 +82,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="inputState">State</label>
                 <select
-                    value={state.formData.state}
+                    onChange={(e) => state.formData.state = e.target.value}
                     id="inputState"
                     className="form-control"
                     required
@@ -89,7 +90,7 @@ const StudentForm = () => {
                     <option>Select state</option>
                     {
                         formData.getStates().map((state, i) => (
-                            <option key={i} value={state.value}>{state.name}</option>
+                            <option key={i}>{state.name}</option>
                         ))
                     }
                 </select>
@@ -99,7 +100,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="zipCode">Zip Code</label>
                 <input
-                    value={state.formData.zipCode}
+                    onChange={(e) => state.formData.zipCode = e.target.value}
                     type="text"
                     className="form-control"
                     id="zipCode"
@@ -112,7 +113,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="school">What school does the student currently attend?</label>
                 <input
-                    value={state.formData.currentSchool}
+                    onChange={(e) => state.formData.currentSchool = e.target.value}
                     type="text"
                     className="form-control"
                     id="school"
@@ -125,7 +126,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="inputGrade">Student's Current Grade</label>
                 <select
-                    value={state.formData.currentGrade}
+                    onChange={(e) => state.formData.currentGrade = e.target.value}
                     id="inputGrade"
                     className="form-control"
                     required
@@ -133,7 +134,7 @@ const StudentForm = () => {
                     <option>Select grade</option>
                     {
                         formData.getGrades().map((grade, i) => (
-                            <option key={i} value={grade.value}>{grade.value}</option>
+                            <option key={i}>{grade.value}</option>
                         ))
                     }
                 </select>
@@ -143,7 +144,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="inputSchool">Which summer school site will this student attend?</label>
                 <select
-                    value={state.formData.summerSchool}
+                    onChange={(e) => state.formData.summerSchool = e.target.value}
                     id="inputSchool"
                     className="form-control"
                     required
@@ -151,7 +152,7 @@ const StudentForm = () => {
                     <option>Select school</option>
                     {
                         formData.getSummerSchoolSites().map((site, i) => (
-                            <option key={i} value={site.value}>{site.value}</option>
+                            <option key={i}>{site.value}</option>
                         ))
                     }
                 </select>
@@ -161,7 +162,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="studentNumber">Student MNPS ID Number (optional)</label>
                 <input
-                    value={state.formData.mnpsId}
+                    onChange={(e) => state.formData.mnpsId = e.target.value}
                     type="number"
                     className="form-control"
                     id="studentNumber"
@@ -173,7 +174,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="birthday">Birthday (optional) </label>
                 <input
-                    value={state.formData.studentBirthday}
+                    onChange={(e) => state.formData.studentBirthday = e.target.value}
                     type="date"
                     className="form-control"
                     id="birthday"
@@ -184,7 +185,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="gender">Gender</label>
                 <select
-                    value={state.formData.studentGender}
+                    onChange={(e) => state.formData.studentGender = e.target.value}
                     id="gender"
                     className="form-control"
                 >
@@ -199,26 +200,22 @@ const StudentForm = () => {
                 <p>Are you requesting daily transporation to and from school?</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.needTransportation = e.target.value}
-                        checked={state.formData.needTransportation === 'Yes'}
+                        onChange={() => state.formData.needTransportation = 'Yes'}
                         className="form-check-input"
                         type="radio"
                         name="transportation"
                         id="transportationTrue"
-                        value="Yes"
                         required
                     />
                     <label className="form-check-label" htmlFor="transportationTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.needTransportation = e.target.value}
-                        checked={state.formData.needTransportation === 'No'}
+                        onChange={() => state.formData.needTransportation = 'No'}
                         className="form-check-input"
                         type="radio"
                         name="transportation"
                         id="transportationFalse"
-                        value="No"
                     />
                     <label className="form-check-label" htmlFor="transportationFalse">No</label>
                 </div>
@@ -228,7 +225,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="primaryLanguage">Primary language spoken at home (optional)</label>
                 <input
-                    value={state.formData.primaryLanguage}
+                    onChange={(e) => state.formData.primaryLanguage = e.target.value}
                     type="text"
                     className="form-control"
                     id="primaryLanguage"
@@ -240,7 +237,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="relationship">What is your relationship to the student(s)? (optional)</label>
                 <input
-                    value={state.formData.relationship}
+                    onChange={(e) => state.formData.relationship = e.target.value}
                     type="text"
                     className="form-control"
                     id="relationship"
@@ -253,25 +250,21 @@ const StudentForm = () => {
                 <p>Does the student need to take medicine at school? (optional)</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.needMedicine = e.target.value}
-                        checked={state.formData.needMedicine === 'Yes'}
+                        onChange={() => state.formData.needMedicine = 'Yes'}
                         className="form-check-input"
                         type="radio"
                         name="medicine"
                         id="medicineTrue"
-                        value="Yes"
                     />
                     <label className="form-check-label" htmlFor="medicineTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.needMedicine = e.target.value}
-                        checked={state.formData.needMedicine === 'No'}
+                        onChange={() => state.formData.needMedicine = 'No'}
                         className="form-check-input"
                         type="radio"
                         name="medicine"
                         id="medicineFalse"
-                        value="No"
                     />
                     <label className="form-check-label" htmlFor="medicineFalse">No</label>
                 </div>
@@ -281,7 +274,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="medicineCondition">If yes, please indicate the medicine and condition requiring medicine.</label>
                 <input
-                    value={state.formData.medicineConditionDesc}
+                    onChange={(e) => state.formData.medicineConditionDesc = e.target.value}
                     type="text"
                     className="form-control"
                     id="medicineCondition"
@@ -294,25 +287,21 @@ const StudentForm = () => {
                 <p>Does the student have allergies to medicine or food, etc? (optional)</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.hasAllergies = e.target.value}
-                        checked={state.formData.hasAllergies === 'Yes'}
+                        onChange={(e) => state.formData.hasAllergies = 'Yes'}
                         className="form-check-input"
                         type="radio"
                         name="allergies"
                         id="allergiesTrue"
-                        value="Yes"
                     />
                     <label className="form-check-label" htmlFor="allergiesTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.hasAllergies = e.target.value}
-                        checked={state.formData.hasAllergies === 'No'}
+                        onChange={(e) => state.formData.hasAllergies = 'No'}
                         className="form-check-input"
                         type="radio"
                         name="allergies"
                         id="allergiesFalse"
-                        value="No"
                     />
                     <label className="form-check-label" htmlFor="allergiesFalse">No</label>
                 </div>
@@ -322,7 +311,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="allergiesList">If yes, please list.</label>
                 <input
-                    value={state.formData.allergiesList}
+                    onChange={(e) => state.formData.allergiesList = e.target.value}
                     type="text"
                     className="form-control"
                     id="allergiesList"
@@ -334,7 +323,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="emergencyContact">In case of emergency during the school day, who should we contact? (optional)</label>
                 <input
-                    value={state.formData.emergencyContact}
+                    onChange={(e) => state.formData.emergencyContact = e.target.value}
                     type="text"
                     className="form-control"
                     id="emergencyContact"
@@ -346,7 +335,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="formGroupExampleInput">Emergency Contact Phone Number (optional)</label>
                 <input
-                    value={state.formData.emergencyContactPhoneNumber}
+                    onChange={(e) => state.formData.emergencyContactPhoneNumber = e.target.value}
                     type="tel"
                     className="form-control"
                     id="formGroupExampleInput"

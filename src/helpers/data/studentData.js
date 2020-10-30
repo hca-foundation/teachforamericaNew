@@ -19,6 +19,7 @@ export const createNewStudent = async (formData) => {
   try {
     // if (!parentFirstName || !phoneNumber) return
     const student = { ...formData, id: uuidv4() };
+    console.log(student);
     // setStudents([...students, student]);
     //   setFormState(initialState);
     await API.graphql(graphqlOperation(createStudent, { input: student }));

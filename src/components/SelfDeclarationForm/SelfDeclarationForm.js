@@ -47,7 +47,7 @@ const SelfDeclarationForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
                 <input
-                    value={state.formData.participatingStudents}
+                    onChange={(e) => state.formData.participatingStudents = e.target.value}
                     type="text"
                     className="form-control"
                     id="participatingStudentNames"
@@ -57,7 +57,7 @@ const SelfDeclarationForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="participatingStudentAddress">Participating Student(s) Address (optional)</label>
                 <input
-                    value={state.formData.participatingStudentAddress}
+                    onChange={(e) => state.formData.participatingStudentAddress = e.target.value}
                     type="text"
                     className="form-control"
                     id="participatingStudentAddress"
@@ -69,14 +69,14 @@ const SelfDeclarationForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="householdNumber">Number in Household (optional)</label>
                 <select
-                    value={state.formData.householdNumber}
+                    onChange={(e) => state.formData.householdNumber = e.target.value}
                     id="householdNumber"
                     className="form-control"
                 >
                     <option>Select number</option>
                     {
                         formData.getNumberInHousehold().map((num, i) => (
-                            <option key={i} value={num.value}>{num.value}</option>
+                            <option key={i}>{num.value}</option>
                         ))
                     }
                 </select>
@@ -86,14 +86,14 @@ const SelfDeclarationForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="grossIncome">Annual Gross Income (optional)</label>
                 <select
-                    value={state.formData.grossIncome}
+                    onChange={(e) => state.formData.grossIncome = e.target.value}
                     id="grossIncome"
                     className="form-control"
                 >
                     <option>Select number</option>
                     {
                         formData.getIncomes().map((x, i) => (
-                            <option key={i} value={x.value}>{x.value}</option>
+                            <option key={i}>{x.value}</option>
                         ))
                     }
                 </select>
