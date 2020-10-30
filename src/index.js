@@ -4,9 +4,9 @@ import Amplify from 'aws-amplify'
 import App from './App/App'
 import './styles/index.scss'
 // import reportWebVitals from './reportWebVitals';
-import awsExports from './aws-exports'
+// import awsExports from './aws-exports'
 
-Amplify.configure(awsExports)
+// Amplify.configure(awsExports)
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
