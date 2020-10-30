@@ -10,6 +10,8 @@
     "serverless"
   ],
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.25",
+    "aws-amplify": "^3.3.5",
     "twilio": "^3.50.0"
   },
   "devDependencies": {

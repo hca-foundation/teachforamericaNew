@@ -12,6 +12,8 @@
 
 .home-header {
   background-color: rgb(7, 14, 40);
+  display: flex;
+  justify-content: space-between;
   .logo-wrapper {
     min-height: 5rem;
     height: 100%;
@@ -27,6 +29,10 @@
         color: rgb(0, 186, 203);
       }
     }
+  }
+  .signout-wrapper {
+    height: 100%;
+    margin: 0.9rem;
   }
 }
 

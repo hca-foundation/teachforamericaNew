@@ -1,4 +1,5 @@
 import React from 'react'
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import {
   BrowserRouter as Router,
   Switch,
