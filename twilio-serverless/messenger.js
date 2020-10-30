@@ -1,15 +1,16 @@
 'use strict'
 
 class Messenger {
-  constructor (client) {
+  constructor (client, body) {
     this.client = client
+    this.body = body
   }
 
   send (event) {
     // use twilio SDK to send text message
     const sms = {
-      to: '+16159275723',
-      body: 'Teach for America Rocks!!!  Sent from Twilio',
+      to: this.body.to,
+      body: this.body.message,
       from: '+18046210826'
     }
 

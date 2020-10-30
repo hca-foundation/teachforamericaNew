@@ -11,13 +11,13 @@ import './Modal.scss'
 import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
-  console.log('selected', selected)
+  const [message, setMessage] = useState('')
   const sendText = async () => {
     const API_ENDPOINT =
       'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
     const data = JSON.stringify({
       to: '+16154897861',
-      message: 'From the application'
+      message
     })
     const response = await fetch(API_ENDPOINT, {
       headers: {
@@ -28,9 +28,7 @@ const ModalComponent = ({ isModalOpen, toggle, selected }) => {
       mode: 'cors'
       // authorization: userEvent.authTOken
     })
-    console.log('response', response)
     let responseJson = await response.json()
-    console.log('responseJson', responseJson)
   }
 
   return (
@@ -38,7 +36,11 @@ const ModalComponent = ({ isModalOpen, toggle, selected }) => {
       <Modal isOpen={isModalOpen}>
         <ModalHeader>Write text message</ModalHeader>
         <ModalBody>
-          <textarea></textarea>
+          <label>Enter message : </label>
+          <textarea
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+          />
         </ModalBody>
         <ModalFooter>
           <Button color='primary' onClick={() => sendText()}>
