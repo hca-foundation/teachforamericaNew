@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container } from "reactstrap";
-import StudentTable from '../StudentTable/StudentTable';
+import { Container, Button } from "reactstrap";
+import StudentTable from "../StudentTable/StudentTable";
 // import "./StudentTable.scss";
 import Modal from "../Modal/Modal";
 import { API, graphqlOperation } from "aws-amplify";
 import { getStudent, listStudents } from "../../graphql/queries";
+import { CSVLink, CSVDownload } from "react-csv";
 
 const columns = [
   { accessor: "parentFirstName", Header: "Parent First Name" },
@@ -69,9 +70,9 @@ const TableComponent = ({
         : updatedSelected
     );
   };
-  
+
   if (students.length < 1) return null;
-  
+
   return (
     <>
       {isModalOpen && (
@@ -83,6 +84,13 @@ const TableComponent = ({
       )}
 
       <Container className="themed-container" fluid={true}>
+        <div>
+          <CSVLink data={students}>
+            <Button raised color="primary">
+              Download CSV
+            </Button>
+          </CSVLink>
+        </div>
         <div>
           <StudentTable columns={columns} data={students} loading={false} />
         </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   useTable,
   useSortBy,
@@ -9,6 +10,7 @@ import {
 } from "react-table";
 
 import {
+  Button,
   Label,
   Input,
   CustomInput,
@@ -132,6 +134,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
           {headerGroups.map((headerGroup) => (
             <>
               <tr className="theader" {...headerGroup.getHeaderGroupProps()}>
+                <th>Select All</th>
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -149,6 +152,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
                         ) : (
                           // <FilterCircle color={"black"} size={15} />
                           <span></span>
+
                         )
                       ) : (
                         ""
@@ -202,6 +206,16 @@ const StudentTable = ({ columns, data, loading = true }) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
+                      <td>
+                        <InputGroup>
+                          <Input
+                            addon
+                            checked={false}
+                            type="checkbox"
+                            onChange={(e) => console.log("student")}
+                          />
+                        </InputGroup>
+                      </td>
                       {row.cells.map((cell) => {
                         return (
                           <td
