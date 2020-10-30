@@ -1,10 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+} from 'reactstrap';
 
+import { GlobalStateContext } from '../../state/globalStore';
+import { setFormDataAction } from '../../state/globalActions';
 import formData from '../../helpers/data/formData';
 
 import './SelfDeclarationForm.scss';
 
-const SelfDeclarationForm = ({ setInput, formState }) => (
+const SelfDeclarationForm = ({ setInput, formState }) => {
+  const { state, dispatch } = useContext(GlobalStateContext);
+  const [ethnicities, setEthnicities] = useState([]);
+
+  useEffect(() => {
+    setEthnicities(formData.getEthnicities());
+  }, []);
+
+  const handleEthnicityChange = (e, i) => {
+    const ethnicityCheckboxes = [...ethnicities];
+
+    ethnicityCheckboxes[i].selected = e.target.checked;
+    setEthnicities(ethnicityCheckboxes);
+
+    const newFormData = state.formData;
+
+    newFormData.ethnicities = ethnicities;
+
+    dispatch(setFormDataAction(newFormData));
+  };
+
+  return (
     <div className="SelfDeclarationForm text-left py-4">
         <h5>Summer Academies Self Declaration Form</h5>
         <p>
@@ -77,21 +106,20 @@ const SelfDeclarationForm = ({ setInput, formState }) => (
             </div>
             <div className="row mb-3">
                 <div className="col-12 mt-2">
-                    <p>Please check all race or ethnicity categories that apply to your student (optional)</p>
-                    {
-                        formData.getEthnicities().map((x, i) => (
-                        <div key={i} className="form-check">
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value={x.value}
-                                id={`choice${i + 1}`}
-                                checked={x.checked}
-                            />
-                            <label className="form-check-label" htmlFor={`choice${i + 1}`}>{x.value}</label>
-                        </div>
-                        ))
-                    }
+                    <FormGroup id="ethnicityCheckboxes">
+                        <Label for="ethnicityCheckboxes">Please check all race or ethnicity categories that apply to your student (optional)</Label>
+
+                        {
+                            ethnicities.map((x, i) => (
+                                <FormGroup key={i} id={`ethnicity${i}`} check>
+                                    <Label for={`ethnicity${i}`} check>
+                                        <Input type="checkbox" checked={x.selected} onChange={(e) => handleEthnicityChange(e, i)} />
+                                        {x.value}
+                                    </Label>
+                                </FormGroup>
+                            ))
+                        }
+                    </FormGroup>
                 </div>
             </div>
             <div className="row">
@@ -128,6 +156,7 @@ const SelfDeclarationForm = ({ setInput, formState }) => (
             </div>
         </form>
     </div>
-);
+  );
+};
 
 export default SelfDeclarationForm;

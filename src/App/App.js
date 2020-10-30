@@ -1,5 +1,6 @@
 import React from 'react';
 
+import GlobalStateProvider from '../state/globalStore';
 import FormPage from '../components/FormPage/FormPage';
 import Nav from '../components/Nav/Nav';
 
@@ -9,8 +10,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Nav />
-        <FormPage />
+        <GlobalStateProvider>
+          <Nav />
+          <FormPage />
+        </GlobalStateProvider>
       </div>
     );
   }

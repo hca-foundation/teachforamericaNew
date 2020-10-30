@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
+import { GlobalStateContext } from '../../state/globalStore';
+import { setFormDataAction } from '../../state/globalActions';
 import ParentGuardianForm from '../ParentGuardianForm/ParentGuardianForm';
 import StudentForm from '../StudentForm/StudentForm';
 import SelfDeclarationForm from '../SelfDeclarationForm/SelfDeclarationForm';
@@ -7,39 +9,50 @@ import SelfDeclarationForm from '../SelfDeclarationForm/SelfDeclarationForm';
 import './FormPage.scss';
 
 const FormPage = () => {
+  const { state, dispatch } = useContext(GlobalStateContext);
   const [formState, setFormState] = useState({
     parentFirstName: '',
     parentLastName: '',
     phoneNumber: '',
     email: '',
-    address: '',
-    address2: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    currentSchool: '',
-    currentGrade: '',
-    summerSchool: '',
-    mnpsId: '',
-    studentBirthday: '',
-    studentGender: '',
-    needTransportation: '',
-    primaryLanguage: '',
-    relationship: '',
-    needMedicine: '',
-    medicineConditionDesc: '',
-    hasAllergies: '',
-    allergiesList: '',
-    emergencyContact: '',
-    emergencyContactPhoneNumber: '',
-    participatingStudents: '',
-    participatingStudentAddress: '',
-    householdNumber: '',
+    ethnicities: [],
     grossIncome: '',
-    studentFirstName: '',
-    studentLastName: '',
-    studentRace: [],
+    householdNumber: '',
+
+    students: [
+      {
+        address: '',
+        address2: '',
+        allergiesList: '',
+        city: '',
+        currentGrade: '',
+        currentSchool: '',
+        emergencyContact: '',
+        emergencyContactPhoneNumber: '',
+        hasAllergies: '',
+        medicineConditionDesc: '',
+        mnpsId: '',
+        needMedicine: '',
+        needTransportation: '',
+        participatingStudents: '',
+        participatingStudentAddress: '',
+        primaryLanguage: '',
+        relationship: '',
+        state: '',
+        studentBirthday: '',
+        studentFirstName: '',
+        studentGender: '',
+        studentLastName: '',
+        summerSchool: '',
+        zipCode: '',
+      },
+    ],
   });
+
+  useEffect(() => {
+    dispatch(setFormDataAction(formState));
+    console.log(state.formData);
+  }, [dispatch, formState, state.formData]);
 
   const setInput = (key, value) => {
     setFormState({ ...formState, [key]: value });
