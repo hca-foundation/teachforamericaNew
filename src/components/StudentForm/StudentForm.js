@@ -382,7 +382,6 @@ const StudentForm = ({ setInput, formState }) => {
             </div>
             <button className="col-4 btn btn-secondary"><i className="fas fa-plus mr-2"></i>Add Another Student</button>
         </form>
-
     </div>
   );
 };
