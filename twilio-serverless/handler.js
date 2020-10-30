@@ -3,7 +3,8 @@ const Messenger = require('./messenger.js')
 const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
 const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken) // eslint-disable-line
-
+//////////////
+//////////////
 module.exports.sendText = (event, context, callback) => {
   const messenger = new Messenger(twilioClient)
 
@@ -11,8 +12,6 @@ module.exports.sendText = (event, context, callback) => {
     headers: { 'Access-Control-Allow-Origin': '*' }, // CORS requirement
     statusCode: 200
   }
-
-  Object.assign(event, { from: '6154897861' })
 
   messenger
     .send(event)

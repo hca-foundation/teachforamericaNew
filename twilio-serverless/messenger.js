@@ -8,15 +8,15 @@ class Messenger {
   send (event) {
     // use twilio SDK to send text message
     const sms = {
-      to: event.body.to,
-      body: event.body.message || '',
-      from: event.from
+      to: '+16154897861',
+      body: 'Teach for America Rocks!!!  Sent from Twilio',
+      from: '+18046210826'
     }
 
     // add image to sms if supplied
-    if (event.body.image) {
-      sms.mediaUrl = event.body.image
-    }
+
+    sms.mediaUrl =
+      'https://live.staticflickr.com/5814/20058976494_0e6dc4caaf_q.jpg'
 
     return this.client.messages.create(sms)
   }

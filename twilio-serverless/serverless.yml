@@ -15,8 +15,6 @@ plugins:
 package:
   exclude:
     - '*.test.js'
-    - 'node_modules/**'
-    - '!node_modules/twilio/**'
 
 functions:
   sendText:
