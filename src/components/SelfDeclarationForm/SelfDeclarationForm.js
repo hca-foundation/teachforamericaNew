@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import formData from '../../helpers/data/formData';
 
 import './SelfDeclarationForm.scss';
 
-const SelfDeclarationForm = () => (
+const SelfDeclarationForm = ({ setInput, formState }) => (
     <div className="SelfDeclarationForm text-left py-4">
         <h5>Summer Academies Self Declaration Form</h5>
         <p>
@@ -18,17 +18,36 @@ const SelfDeclarationForm = () => (
             <div className="row">
                 <div className="form-group col-12">
                     <label htmlFor="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
-                    <input type="text" className="form-control" id="participatingStudentNames" maxLength="100" />
+                    <input
+                        onChange={(e) => setInput('participatingStudents', e.target.value)}
+                        value={formState.participatingStudents}
+                        type="text"
+                        className="form-control"
+                        id="participatingStudentNames"
+                        maxLength="100"
+                    />
                 </div>
                 <div className="form-group col-12">
                     <label htmlFor="participatingStudentAddress">Participating Student(s) Address (optional)</label>
-                    <input type="text" className="form-control" id="participatingStudentAddress" maxLength="100" />
+                    <input
+                        onChange={(e) => setInput('participatingStudentAddress', e.target.value)}
+                        value={formState.participatingStudentAddress}
+                        type="text"
+                        className="form-control"
+                        id="participatingStudentAddress"
+                        maxLength="100"
+                    />
                 </div>
             </div>
             <div className="row">
                 <div className="form-group col-6">
                     <label htmlFor="householdNumber">Number in Household (optional)</label>
-                    <select defaultValue="" id="householdNumber" className="form-control">
+                    <select
+                        onChange={(e) => setInput('householdNumber', e.target.value)}
+                        value={formState.householdNumber}
+                        id="householdNumber"
+                        className="form-control"
+                    >
                         <option>Select number</option>
                         {
                             formData.getNumberInHousehold().map((num, i) => (
@@ -41,7 +60,12 @@ const SelfDeclarationForm = () => (
             <div className="row">
                 <div className="form-group col-6">
                     <label htmlFor="grossIncome">Annual Gross Income (optional)</label>
-                    <select defaultValue="" id="grossIncome" className="form-control">
+                    <select
+                        onChange={(e) => setInput('grossIncome', e.target.value)}
+                        value={formState.grossIncome}
+                        id="grossIncome"
+                        className="form-control"
+                    >
                         <option>Select number</option>
                         {
                             formData.getIncomes().map((x, i) => (
@@ -57,7 +81,13 @@ const SelfDeclarationForm = () => (
                     {
                         formData.getEthnicities().map((x, i) => (
                         <div key={i} className="form-check">
-                            <input className="form-check-input" type="checkbox" value={x.value} id={`choice${i + 1}`} />
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value={x.value}
+                                id={`choice${i + 1}`}
+                                checked={x.checked}
+                            />
                             <label className="form-check-label" htmlFor={`choice${i + 1}`}>{x.value}</label>
                         </div>
                         ))
