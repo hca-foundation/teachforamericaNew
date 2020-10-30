@@ -247,10 +247,112 @@ const grades = [
   },
 ];
 
+const summerSchoolSites = [
+  {
+    value: 'Gra-Mar Elementary (current K-4)',
+  },
+  {
+    value: 'Gra-Mar Middle (current 5-8)',
+  },
+  {
+    value: 'Wright Middle (current 5-8)',
+  },
+];
+
+const numberInHousehold = [
+  {
+    value: '2 persons',
+  },
+  {
+    value: '3 persons',
+  },
+  {
+    value: '4 persons',
+  },
+  {
+    value: '5 persons',
+  },
+  {
+    value: '6 persons',
+  },
+  {
+    value: '7 persons',
+  },
+  {
+    value: '8 persons',
+  },
+];
+
+const grossIncomes = [
+  {
+    value: '$0 – $30,045',
+  },
+  {
+    value: '$30,041 - $38,442',
+  },
+  {
+    value: '$38,443 - $46,434',
+  },
+  {
+    value: '$46,435 - $54,426',
+  },
+  {
+    value: '$54,427 – $62,418',
+  },
+  {
+    value: '$62,419 - $70,410',
+  },
+  {
+    value: 'Over $70,411',
+  },
+];
+
+const ethnicities = [
+  {
+    value: 'Alaskan, Native, or American Indian',
+    checked: false,
+  },
+  {
+    value: 'Asian',
+    checked: false,
+  },
+  {
+    value: 'Black or African-American',
+    checked: false,
+  },
+  {
+    value: 'Latino or Hispanic',
+    checked: false,
+  },
+  {
+    value: 'Middle Eastern, North African, or Arab American',
+    checked: false,
+  },
+  {
+    value: 'White',
+    checked: false,
+  },
+];
+
 const getStates = () => states;
 
 const getGrades = () => grades;
 
-const exportObj = { getStates, getGrades };
+const getSummerSchoolSites = () => summerSchoolSites;
+
+const getNumberInHousehold = () => numberInHousehold;
+
+const getIncomes = () => grossIncomes;
+
+const getEthnicities = () => ethnicities;
+
+const exportObj = {
+  getStates,
+  getGrades,
+  getSummerSchoolSites,
+  getNumberInHousehold,
+  getIncomes,
+  getEthnicities,
+};
 
 export default exportObj;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import formData from '../../helpers/data/formData';
+
 import './SelfDeclarationForm.scss';
 
 const SelfDeclarationForm = () => (
@@ -14,64 +16,52 @@ const SelfDeclarationForm = () => (
         </p>
         <form>
             <div className="row">
-                <div class="form-group col-12">
-                    <label for="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
-                    <input type="text" class="form-control" id="participatingStudentNames" maxLength="100" />
+                <div className="form-group col-12">
+                    <label htmlFor="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
+                    <input type="text" className="form-control" id="participatingStudentNames" maxLength="100" />
                 </div>
-                <div class="form-group col-12">
-                    <label for="participatingStudentAddress">Participating Student(s) Address (optional)</label>
-                    <input type="text" class="form-control" id="participatingStudentAddress" maxLength="100" />
+                <div className="form-group col-12">
+                    <label htmlFor="participatingStudentAddress">Participating Student(s) Address (optional)</label>
+                    <input type="text" className="form-control" id="participatingStudentAddress" maxLength="100" />
                 </div>
             </div>
             <div className="row">
-                <div class="form-group col-6">
-                    <label for="householdNumber">Number in Household (optional)</label>
-                    <select id="householdNumber" class="form-control">
-                        <option selected>Select number</option>
-                        <option>...</option>
+                <div className="form-group col-6">
+                    <label htmlFor="householdNumber">Number in Household (optional)</label>
+                    <select defaultValue="" id="householdNumber" className="form-control">
+                        <option>Select number</option>
+                        {
+                            formData.getNumberInHousehold().map((num, i) => (
+                                <option key={i} value={num.value}>{num.value}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
             <div className="row">
-                <div class="form-group col-6">
-                    <label for="grossIncome">Annual Gross Income (optional)</label>
-                    <select id="grossIncome" class="form-control">
-                        <option selected>Select number</option>
-                        <option>...</option>
+                <div className="form-group col-6">
+                    <label htmlFor="grossIncome">Annual Gross Income (optional)</label>
+                    <select defaultValue="" id="grossIncome" className="form-control">
+                        <option>Select number</option>
+                        {
+                            formData.getIncomes().map((x, i) => (
+                                <option key={i} value={x.value}>{x.value}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
             <div className="row mb-3">
                 <div className="col-12 mt-2">
                     <p>Please check all race or ethnicity categories that apply to your student (optional)</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
+                    {
+                        formData.getEthnicities().map((x, i) => (
+                        <div key={i} className="form-check">
+                            <input className="form-check-input" type="checkbox" value={x.value} id={`choice${i + 1}`} />
+                            <label className="form-check-label" htmlFor={`choice${i + 1}`}>{x.value}</label>
+                        </div>
+                        ))
+                    }
                 </div>
             </div>
             <div className="row">
@@ -96,13 +86,13 @@ const SelfDeclarationForm = () => (
             </div>
             <div className="row mb-3">
                 <div className="col-12">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="consent" id="consentTrue" value="true" />
-                        <label class="form-check-label" for="consentTrue">I consent</label>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="consent" id="consentTrue" value="true" />
+                        <label className="form-check-label" htmlFor="consentTrue">I consent</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="consent" id="consentFalse" value="false" />
-                        <label class="form-check-label" for="consentFalse">I do not consent</label>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="consent" id="consentFalse" value="false" />
+                        <label className="form-check-label" htmlFor="consentFalse">I do not consent</label>
                     </div>
                 </div>
             </div>

@@ -5,22 +5,18 @@ import formData from '../../helpers/data/formData';
 import './StudentForm.scss';
 
 const StudentForm = () => {
-  const [states, setStates] = useState([]);
-  const [grades, setGrades] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
-
-  const getData = () => {
-    const allStates = formData.getStates();
-    const allGrades = formData.getGrades();
-    setStates(allStates);
-    setGrades(allGrades);
-  };
 
   useEffect(() => {
     setIsMounted(true);
+    const getData = () => {
+      if (isMounted) {
+        console.log('Mounted');
+      }
+    };
     getData();
     return () => setIsMounted(false);
-  });
+  }, [isMounted]);
 
   return (
     <div className="StudentForm text-left py-4">
@@ -55,10 +51,10 @@ const StudentForm = () => {
                 </div>
                 <div className="form-group col-6">
                     <label htmlFor="inputState">State</label>
-                    <select id="inputState" className="form-control" required>
-                        <option value="" selected>Select state</option>
+                    <select defaultValue="" id="inputState" className="form-control" required>
+                        <option>Select state</option>
                         {
-                            states.map((state, i) => (
+                            formData.getStates().map((state, i) => (
                                 <option key={i} value={state.value}>{state.name}</option>
                             ))
                         }
@@ -80,10 +76,10 @@ const StudentForm = () => {
             <div className="row">
                 <div className="form-group col-6">
                     <label htmlFor="inputGrade">Student's Current Grade</label>
-                    <select id="inputGrade" className="form-control" required>
-                        <option value="" selected>Select grade</option>
+                    <select defaultValue="" id="inputGrade" className="form-control" required>
+                        <option>Select grade</option>
                         {
-                            grades.map((grade, i) => (
+                            formData.getGrades().map((grade, i) => (
                                 <option key={i} value={grade.value}>{grade.value}</option>
                             ))
                         }
@@ -93,9 +89,13 @@ const StudentForm = () => {
             <div className="row">
                 <div className="form-group col-12">
                     <label htmlFor="inputSchool">Which summer school site will this student attend?</label>
-                    <select id="inputSchool" className="form-control" required>
-                        <option value="" selected>Select school</option>
-                        <option>...</option>
+                    <select defaultValue="" id="inputSchool" className="form-control" required>
+                        <option>Select school</option>
+                        {
+                            formData.getSummerSchoolSites().map((site, i) => (
+                                <option key={i} value={site.value}>{site.value}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
@@ -114,8 +114,8 @@ const StudentForm = () => {
             <div className="row">
                 <div className="form-group col-6">
                     <label htmlFor="gender">Gender</label>
-                    <select id="gender" className="form-control">
-                        <option selected>Select gender</option>
+                    <select defaultValue="" id="gender" className="form-control">
+                        <option>Select gender</option>
                         <option>Male</option>
                         <option>Female</option>
                     </select>
