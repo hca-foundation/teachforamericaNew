@@ -11,7 +11,6 @@ import {
 import {
   Label,
   Input,
-  InputGroup,
   CustomInput,
   FormGroup,
   Table,
@@ -19,9 +18,11 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
-import {matchSorter} from "match-sorter";
+import { matchSorter } from "match-sorter";
 import classNames from "classnames";
 import "./StudentTable.scss";
+import { SortDown, SortUp, FilterCircle } from "react-bootstrap-icons";
+
 // import sortasc from "./assets/sort_asc.png";
 // import sortdesc from "./assets/sort_desc.png";
 // import sortboth from "./assets/sort_both.png";
@@ -131,22 +132,23 @@ const StudentTable = ({ columns, data, loading = true }) => {
           {headerGroups.map((headerGroup) => (
             <>
               <tr className="theader" {...headerGroup.getHeaderGroupProps()}>
-                <th>
-                  Select All
-                </th>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    style={{ whiteSpace: "nowrap" }}
+                  >
                     {column.render("Header")}
-                    <span className="float-right">
+                    <span className={"ml-2"}>
                       {!column.notShowSortingDisplay ? (
                         column.isSorted ? (
                           column.isSortedDesc ? (
-                            <img src={'sortdesc'} alt="descending" />
+                            <SortDown color={"black"} size={15} />
                           ) : (
-                            <img src={'sortasc'} alt="ascending" />
+                            <SortUp color={"black"} size={15} />
                           )
                         ) : (
-                          <img src={'sortboth'} alt="sorting" />
+                          // <FilterCircle color={"black"} size={15} />
+                          <span></span>
                         )
                       ) : (
                         ""
@@ -180,7 +182,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
           <tbody>
             <tr>
               <td colSpan="10000" className="text-center">
-                <img src={'loaderimage'} alt="Loading..." />
+                <img src={"loaderimage"} alt="Loading..." />
               </td>
             </tr>
           </tbody>
@@ -200,16 +202,6 @@ const StudentTable = ({ columns, data, loading = true }) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
-                      <td>
-                        <InputGroup>
-                          <Input
-                            addon
-                            checked={false}
-                            type="checkbox"
-                            onChange={(e) => console.log('student')}
-                          />
-                        </InputGroup>
-                      </td>
                       {row.cells.map((cell) => {
                         return (
                           <td

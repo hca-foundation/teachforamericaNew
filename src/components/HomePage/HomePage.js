@@ -17,15 +17,7 @@ const HomePage = () => {
       </nav>
 
       <div className="content-wrapper">
-        <aside className="options">
-          <div className="filter-sort-btns-wrapper">
-            <Button outline color="info">
-              Filter
-            </Button>
-            <Button outline color="info">
-              Sort
-            </Button>
-          </div>
+        {/* <aside className="options">
           <div className="open-message-btn-wrapper">
             <Button
               color="primary"
@@ -35,7 +27,7 @@ const HomePage = () => {
               Message Selected Students ({selected.length})
             </Button>
           </div>
-        </aside>
+        </aside> */}
         <div className="content-wrapper">
           <TableComponent
             isModalOpen={isModalOpen}
