@@ -12,6 +12,18 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   console.log('selected', selected)
+  const sendText = () => {
+    const response = await fetch('https://eqehgxhrz8.execute-api.us-west-1.amazonaws.com/Production');
+    let responseJson = await response.json();
+    this.setState(
+      {
+        isLoading: false,
+        dataSource: responseJson
+      },
+      function() {}
+    );
+  }
+
   return (
     <>
       <Modal isOpen={isModalOpen}>

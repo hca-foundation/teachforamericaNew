@@ -8,7 +8,7 @@ class Messenger {
   send (event) {
     // use twilio SDK to send text message
     const sms = {
-      to: '+1',
+      to: '+16154897861',
       body: 'Teach for America Rocks!!!  Sent from Twilio',
       from: '+18046210826'
     }
