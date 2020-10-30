@@ -25,3 +25,4 @@ functions:
           method: post
           integration: lambda
           cors: true
+          authorizer: aws_iam

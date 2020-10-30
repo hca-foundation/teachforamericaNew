@@ -13,17 +13,24 @@ import { API, graphqlOperation } from 'aws-amplify'
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   console.log('selected', selected)
   const sendText = async () => {
-    const response = await fetch(
-      'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev'
-    )
-    let responseJson = await response.json()
-    this.setState(
-      {
-        isLoading: false,
-        dataSource: responseJson
+    const API_ENDPOINT =
+      'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
+    const data = JSON.stringify({
+      to: '+16154897861',
+      message: 'From the application'
+    })
+    const response = await fetch(API_ENDPOINT, {
+      headers: {
+        'Content-type': 'application/json'
       },
-      function () {}
-    )
+      method: 'POST',
+      body: data,
+      mode: 'cors'
+      // authorization: userEvent.authTOken
+    })
+    console.log('response', response)
+    let responseJson = await response.json()
+    console.log('responseJson', responseJson)
   }
 
   return (
