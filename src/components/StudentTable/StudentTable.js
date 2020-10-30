@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   useTable,
   useSortBy,
@@ -9,6 +10,7 @@ import {
 } from "react-table";
 
 import {
+  Button,
   Label,
   Input,
   InputGroup,
@@ -19,7 +21,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
-import {matchSorter} from "match-sorter";
+import { matchSorter } from "match-sorter";
 import classNames from "classnames";
 import "./StudentTable.scss";
 // import sortasc from "./assets/sort_asc.png";
@@ -131,9 +133,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
           {headerGroups.map((headerGroup) => (
             <>
               <tr className="theader" {...headerGroup.getHeaderGroupProps()}>
-                <th>
-                  Select All
-                </th>
+                <th>Select All</th>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}
@@ -141,12 +141,12 @@ const StudentTable = ({ columns, data, loading = true }) => {
                       {!column.notShowSortingDisplay ? (
                         column.isSorted ? (
                           column.isSortedDesc ? (
-                            <img src={'sortdesc'} alt="descending" />
+                            <img src={"sortdesc"} alt="descending" />
                           ) : (
-                            <img src={'sortasc'} alt="ascending" />
+                            <img src={"sortasc"} alt="ascending" />
                           )
                         ) : (
-                          <img src={'sortboth'} alt="sorting" />
+                          <img src={"sortboth"} alt="sorting" />
                         )
                       ) : (
                         ""
@@ -180,7 +180,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
           <tbody>
             <tr>
               <td colSpan="10000" className="text-center">
-                <img src={'loaderimage'} alt="Loading..." />
+                <img src={"loaderimage"} alt="Loading..." />
               </td>
             </tr>
           </tbody>
@@ -206,7 +206,7 @@ const StudentTable = ({ columns, data, loading = true }) => {
                             addon
                             checked={false}
                             type="checkbox"
-                            onChange={(e) => console.log('student')}
+                            onChange={(e) => console.log("student")}
                           />
                         </InputGroup>
                       </td>
