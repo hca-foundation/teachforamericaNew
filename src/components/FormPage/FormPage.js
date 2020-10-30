@@ -8,8 +8,8 @@ import './FormPage.scss';
 
 const FormPage = () => (
     <div className="Form col-6 mx-auto my-5">
-        <h5>Academy Student Registration: Grades K-8</h5>
-        <p><em>All fields required unless noted optional</em></p>
+        <h1>Academy Student Registration: Grades K-8</h1>
+        <h4><em>All fields required unless noted optional</em></h4>
         <ParentGuardianForm />
         <StudentForm />
         <SelfDeclarationForm />
