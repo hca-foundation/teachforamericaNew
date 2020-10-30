@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import { v4 as uuidv4 } from 'uuid';
-import { createStudent } from '../../graphql/mutations';
-import { getStudent, listStudents } from '../../graphql/queries';
+import React, { useEffect, useState, useRef } from 'react'
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import { v4 as uuidv4 } from 'uuid'
+import { createStudent } from '../../graphql/mutations'
+import { getStudent, listStudents } from '../../graphql/queries'
 
-import './ParentGuardianForm.scss';
+import './ParentGuardianForm.scss'
 
 // const initialState = {
 //   id: '',
@@ -25,38 +25,38 @@ import './ParentGuardianForm.scss';
 // };
 
 const ParentGuardianForm = () => {
-//   const [formState, setFormState] = useState(initialState);
-  const [students, setStudents] = useState([]);
-  const parentFirstName = useRef();
-  const parentLastName = useRef();
-  const phoneNumber = useRef();
-  const email = useRef();
-  const primaryLanguage = useRef();
-  const relationship = useRef();
-  const studentFirstName = useRef();
-  const studentLastName = useRef();
-  const studentBirthday = useRef();
-  const studentGender = useRef();
-  const studentRace = useRef();
-  const districtName = useRef();
-  const school = useRef();
-  const description = useRef();
+  //   const [formState, setFormState] = useState(initialState);
+  const [students, setStudents] = useState([])
+  const parentFirstName = useRef()
+  const parentLastName = useRef()
+  const phoneNumber = useRef()
+  const email = useRef()
+  const primaryLanguage = useRef()
+  const relationship = useRef()
+  const studentFirstName = useRef()
+  const studentLastName = useRef()
+  const studentBirthday = useRef()
+  const studentGender = useRef()
+  const studentRace = useRef()
+  const districtName = useRef()
+  const school = useRef()
+  const description = useRef()
 
   useEffect(() => {
-    fetchStudents();
-  }, []);
+    fetchStudents()
+  }, [])
 
-  async function fetchStudents() {
+  async function fetchStudents () {
     try {
-      const studentData = await API.graphql(graphqlOperation(listStudents));
-      const allStudents = studentData.data.listStudents.items;
-      setStudents(allStudents);
+      const studentData = await API.graphql(graphqlOperation(listStudents))
+      const allStudents = studentData.data.listStudents.items
+      setStudents(allStudents)
     } catch (err) {
-      console.log('error fetching students');
+      console.log('error fetching students')
     }
   }
 
-  async function createNewStudent() {
+  async function createNewStudent () {
     // const {
     //   parentFirstName,
     //   parentLastName,
@@ -88,54 +88,83 @@ const ParentGuardianForm = () => {
       studentRace: studentRace.current.value,
       districtName: districtName.current.value,
       school: school.current.value,
-      description: description.current.value,
-    };
+      description: description.current.value
+    }
 
     try {
       // if (!parentFirstName || !phoneNumber) return
-      const student = { ...newStudent, id: uuidv4() };
-      setStudents([...students, student]);
+      const student = { ...newStudent, id: uuidv4() }
+      setStudents([...students, student])
       //   setFormState(initialState);
-      await API.graphql(graphqlOperation(createStudent, { input: student }));
+      await API.graphql(graphqlOperation(createStudent, { input: student }))
     } catch (err) {
-      console.log('error creating student:', err);
+      console.log('error creating student:', err)
     }
   }
 
   //   function setInput(key, value) {
   //     setFormState({ ...formState, [key]: value });
   //   }
-  console.log('students', students);
+  console.log('students', students)
   return (
-    <div className="ParentGuardianForm text-left py-4">
+    <div className='ParentGuardianForm text-left py-4'>
       <form>
         <h5>Parent/Guardian Information</h5>
-        <div className="row">
-          <div className="form-group col-6">
-            <label htmlFor="parentGuardianFirstName">Parent/Guardian First Name</label>
-            <input type="text" className="form-control" id="parentGuardianFirstName" maxLength="50" required/>
+        <div className='row'>
+          <div className='form-group col-6'>
+            <label htmlFor='parentGuardianFirstName'>
+              Parent/Guardian First Name
+            </label>
+            <input
+              type='text'
+              className='form-control'
+              id='parentGuardianFirstName'
+              maxLength='50'
+              required
+            />
           </div>
-          <div className="form-group col-6">
-            <label htmlFor="parentGuardianLastName">Parent/Guardian Last Name</label>
-            <input type="text" className="form-control" id="parentGuardianLastName" maxLength="50" required/>
+          <div className='form-group col-6'>
+            <label htmlFor='parentGuardianLastName'>
+              Parent/Guardian Last Name
+            </label>
+            <input
+              type='text'
+              className='form-control'
+              id='parentGuardianLastName'
+              maxLength='50'
+              required
+            />
           </div>
         </div>
-        <div className="row">
-          <div className="form-group col-6">
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input type="tel" className="form-control" id="phoneNumber" placeholder="(xxx)xxx-xxxx" maxLength="10" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required/>
+        <div className='row'>
+          <div className='form-group col-6'>
+            <label htmlFor='phoneNumber'>Phone Number</label>
+            <input
+              type='tel'
+              className='form-control'
+              id='phoneNumber'
+              placeholder='(xxx)xxx-xxxx'
+              maxLength='10'
+              pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+              required
+            />
           </div>
         </div>
-        <div className="row">
-          <div className="form-group col-12">
-            <label htmlFor="email">Email (optional)</label>
-            <input type="email" className="form-control" id="email" maxLength="100" />
+        <div className='row'>
+          <div className='form-group col-12'>
+            <label htmlFor='email'>Email (optional)</label>
+            <input
+              type='email'
+              className='form-control'
+              id='email'
+              maxLength='100'
+            />
           </div>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 // const styles = {
 //   container: {
@@ -165,4 +194,4 @@ const ParentGuardianForm = () => {
 //   },
 // };
 
-export default ParentGuardianForm;
+export default ParentGuardianForm

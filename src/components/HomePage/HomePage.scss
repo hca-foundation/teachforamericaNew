@@ -1,0 +1,49 @@
+.home-container {
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 5rem);
+
+    .content-wrapper {
+      height: 100%;
+    }
+  }
+}
+
+.home-header {
+  background-color: rgb(7, 14, 40);
+  .logo-wrapper {
+    min-height: 5rem;
+    height: 100%;
+    max-width: 32rem;
+    padding: 0 1.5rem;
+    background-color: #fff;
+    .logo {
+      display: flex;
+      flex-direction: row;
+      font-size: 3rem;
+
+      #logo-for {
+        color: rgb(0, 186, 203);
+      }
+    }
+  }
+}
+
+aside.options {
+  min-height: 8rem;
+  background-color: rgb(227, 227, 227);
+  display: flex;
+  justify-content: space-between;
+  .filter-sort-btns-wrapper {
+    align-self: center;
+    margin-left: 1.5rem;
+    min-width: 9rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .open-message-btn-wrapper {
+    align-self: center;
+    margin-right: 1.5rem;
+  }
+}

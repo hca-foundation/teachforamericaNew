@@ -1,17 +1,31 @@
-import React from 'react';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from 'react-router-dom'
 
-import FormPage from '../components/FormPage/FormPage';
+import FormPage from '../components/FormPage/FormPage'
+import HomePage from '../components/HomePage/HomePage'
 
-import './App.scss';
+import './App.scss'
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <FormPage />
-      </div>
-    );
+      <>
+        <Router>
+          <Switch>
+            <Route path='/' exact component={HomePage} />
+            <Route path='/form' component={FormPage} />
+          </Switch>
+        </Router>
+      </>
+    )
   }
 }
 
-export default App;
+export default App
