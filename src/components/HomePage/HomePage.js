@@ -9,12 +9,14 @@ const HomePage = () => {
   const [selected, setSelected] = useState([])
   return (
     <div className='home-container'>
-      <AmplifySignOut />
       <nav className='home-header'>
         <div className='logo-wrapper'>
           <div className='logo'>
             TEACH<div id='logo-for'>FOR</div>AMERICA
           </div>
+        </div>
+        <div className='signout-wrapper'>
+          <AmplifySignOut />
         </div>
       </nav>
 

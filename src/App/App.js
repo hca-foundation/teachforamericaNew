@@ -1,5 +1,4 @@
 import React from 'react'
-import Amplify, { Auth } from 'aws-amplify'
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import {
   BrowserRouter as Router,
