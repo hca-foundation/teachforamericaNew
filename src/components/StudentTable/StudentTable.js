@@ -1,17 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  Table,
-  Label,
-  CustomInput,
-  FormGroup,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-} from "reactstrap";
+import React, { useState } from "react";
 import {
   useTable,
   useSortBy,
@@ -20,33 +7,25 @@ import {
   useGlobalFilter,
   // useAsyncDebounce,
 } from "react-table";
-import { matchSorter } from "match-sorter";
-import classNames from "classnames";
-//import sortasc from "./assets/sort_asc.png";
-//import sortdesc from "./assets/sort_desc.png";
-//import sortboth from "./assets/sort_both.png";
-//import loaderimage from "./assets/loader-table.gif";
-import "./Table.scss";
-import Modal from "../Modal/Modal";
-import { API, graphqlOperation } from "aws-amplify";
-import { getStudent, listStudents } from "../../graphql/queries";
 
-const columns = [
-  { name: "parentFirstName", title: "Parent First Name" },
-  { name: "parentLastName", title: "Parent Last Name" },
-  { name: "phoneNumber", title: "Phone" },
-  { name: "email", title: "Email" },
-  { name: "primaryLanguage", title: "Primary Language" },
-  { name: "relationship", title: "Relationship" },
-  { name: "studentFirstName", title: "Student First Name" },
-  { name: "studentLastName", title: "Student Last Name" },
-  { name: "studentBirthday", title: "Student Birthday" },
-  { name: "studentGender", title: "Student Gender" },
-  { name: "studentRace", title: "Student Race" },
-  { name: "districtName", title: "District" },
-  { name: "school", title: "School" },
-  { name: "description", title: "Description" },
-];
+import {
+  Label,
+  Input,
+  InputGroup,
+  CustomInput,
+  FormGroup,
+  Table,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
+import {matchSorter} from "match-sorter";
+import classNames from "classnames";
+import "./StudentTable.scss";
+// import sortasc from "./assets/sort_asc.png";
+// import sortdesc from "./assets/sort_desc.png";
+// import sortboth from "./assets/sort_both.png";
+// import loaderimage from "./assets/loader-table.gif";
 
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
@@ -72,17 +51,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 
 fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-const TableComponent = ({
-  isModalOpen,
-  setIsModalOpen,
-  selected,
-  setSelected,
-  columns,
-  data,
-  loading,
-}) => {
-  const [students, setStudents] = useState([]);
-
+const StudentTable = ({ columns, data, loading = true }) => {
   const [switchSearch, setSwitchSearch] = useState(false);
   const toggleSwitchSearch = () => {
     setAllFilters([]);
@@ -141,45 +110,7 @@ const TableComponent = ({
     useSortBy,
     usePagination
   );
-  useEffect(() => {
-    fetchStudents();
-  }, []);
 
-  async function fetchStudents() {
-    try {
-      const studentData = await API.graphql(graphqlOperation(listStudents));
-      const allStudents = studentData.data.listStudents.items;
-      setStudents(allStudents);
-    } catch (err) {
-      console.log("error fetching students");
-    }
-  }
-
-  /**
-   * adds and removes students from selected
-   * @param {*} student object
-   */
-  const selectHandler = (student) => {
-    // reduce removes student if they are already selected
-    const updatedSelected =
-      selected.length < 1
-        ? [student]
-        : selected.reduce((acc, cur) => {
-            if (cur.id === student.id) {
-              console.log("acc", acc);
-              return acc;
-            } else {
-              return [...acc, cur];
-            }
-          }, []);
-    // if no students have been removed, then add the student that was selected
-    setSelected(
-      updatedSelected.length === selected.length
-        ? [...updatedSelected, student]
-        : updatedSelected
-    );
-  };
-  if (students.length < 1) return null;
   return (
     <>
       <div>
@@ -195,11 +126,14 @@ const TableComponent = ({
           />
         </span>
       </div>
-      <Table {...getTableProps()} hover bordered responsive>
+      <Table {...getTableProps()} striped hover bordered responsive>
         <thead>
           {headerGroups.map((headerGroup) => (
             <>
               <tr className="theader" {...headerGroup.getHeaderGroupProps()}>
+                <th>
+                  Select All
+                </th>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}
@@ -207,12 +141,12 @@ const TableComponent = ({
                       {!column.notShowSortingDisplay ? (
                         column.isSorted ? (
                           column.isSortedDesc ? (
-                            <img src={sortdesc} alt="descending" />
+                            <img src={'sortdesc'} alt="descending" />
                           ) : (
-                            <img src={sortasc} alt="ascending" />
+                            <img src={'sortasc'} alt="ascending" />
                           )
                         ) : (
-                          <img src={sortboth} alt="sorting" />
+                          <img src={'sortboth'} alt="sorting" />
                         )
                       ) : (
                         ""
@@ -246,7 +180,7 @@ const TableComponent = ({
           <tbody>
             <tr>
               <td colSpan="10000" className="text-center">
-                <img src={loaderimage} alt="Loading..." />
+                <img src={'loaderimage'} alt="Loading..." />
               </td>
             </tr>
           </tbody>
@@ -266,6 +200,16 @@ const TableComponent = ({
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
+                      <td>
+                        <InputGroup>
+                          <Input
+                            addon
+                            checked={false}
+                            type="checkbox"
+                            onChange={(e) => console.log('student')}
+                          />
+                        </InputGroup>
+                      </td>
                       {row.cells.map((cell) => {
                         return (
                           <td
@@ -351,52 +295,4 @@ const TableComponent = ({
   );
 };
 
-export default TableComponent;
-
-// {isModalOpen && (
-//   <Modal
-//     selected={selected}
-//     isModalOpen={isModalOpen}
-//     toggle={setIsModalOpen}
-//   />
-// )}
-// <div className="p-3">
-//   <Table striped>
-//     <thead>
-//       <tr>
-//         <th></th>
-//         <th>#</th>
-//         {columns.map(({ title }) => (
-//           <th key={title}>{title}</th>
-//         ))}
-//       </tr>
-//     </thead>
-//     <tbody>
-//       {students.map((student, i) => {
-//         // console.log('student', student)
-//         return (
-//           <tr key={i}>
-//             <th>
-//               {" "}
-//               <InputGroup>
-//                 <Input
-//                   addon
-//                   checked={
-//                     selected.filter(({ id }) => id === student.id)
-//                       .length > 0
-//                   }
-//                   type="checkbox"
-//                   onChange={(e) => selectHandler(student, e)}
-//                 />
-//               </InputGroup>
-//             </th>
-//             <th scope="row">{i + 1}</th>
-//             {columns.map(({ name }) => (
-//               <td key={name}>{student[name]}</td>
-//             ))}
-//           </tr>
-//         );
-//       })}
-//     </tbody>
-//   </Table>
-// </div>
+export default StudentTable;
