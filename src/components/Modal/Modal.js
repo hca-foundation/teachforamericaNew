@@ -12,11 +12,12 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   const [message, setMessage] = useState('')
+  const { phoneNumber } = selected[0]
   const sendText = async () => {
     const API_ENDPOINT =
       'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
     const data = JSON.stringify({
-      to: '+16154897861',
+      to: '+' + phoneNumber,
       message
     })
     const response = await fetch(API_ENDPOINT, {
