@@ -16,5 +16,12 @@
 				}
 			}
 		}
+	},
+	"auth": {
+		"teachforamericafd094a3a": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
 	}
 }

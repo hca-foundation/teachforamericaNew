@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'reactstrap'
 import './HomePage.scss'
 import Table from '../Table/Table'
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -13,6 +14,9 @@ const HomePage = () => {
           <div className='logo'>
             TEACH<div id='logo-for'>FOR</div>AMERICA
           </div>
+        </div>
+        <div className='signout-wrapper'>
+          <AmplifySignOut />
         </div>
       </nav>
 
@@ -49,4 +53,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default withAuthenticator(HomePage)
