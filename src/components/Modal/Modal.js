@@ -12,16 +12,18 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   console.log('selected', selected)
-  const sendText = () => {
-    const response = await fetch('https://eqehgxhrz8.execute-api.us-west-1.amazonaws.com/Production');
-    let responseJson = await response.json();
+  const sendText = async () => {
+    const response = await fetch(
+      'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev'
+    )
+    let responseJson = await response.json()
     this.setState(
       {
         isLoading: false,
         dataSource: responseJson
       },
-      function() {}
-    );
+      function () {}
+    )
   }
 
   return (
@@ -32,7 +34,7 @@ const ModalComponent = ({ isModalOpen, toggle, selected }) => {
           <textarea></textarea>
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={() => toggle(false)}>
+          <Button color='primary' onClick={() => sendText()}>
             Send Message
           </Button>{' '}
           <Button color='secondary' onClick={() => toggle(false)}>
