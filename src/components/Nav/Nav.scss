@@ -1,3 +1,13 @@
 .Nav {
     display: block;
+    .nav-main {
+        background-color: rgb(12, 12, 61);
+        .logo {
+            font-size: 40px;
+            color: navy;
+            .for {
+                color: lightblue;
+            }
+        }
+    }
 }
