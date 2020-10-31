@@ -35,21 +35,3 @@
     margin: 0.9rem;
   }
 }
-
-aside.options {
-  min-height: 8rem;
-  background-color: rgb(227, 227, 227);
-  display: flex;
-  justify-content: space-between;
-  .filter-sort-btns-wrapper {
-    align-self: center;
-    margin-left: 1.5rem;
-    min-width: 9rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  .open-message-btn-wrapper {
-    align-self: center;
-    margin-right: 1.5rem;
-  }
-}

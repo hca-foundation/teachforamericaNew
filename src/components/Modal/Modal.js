@@ -12,7 +12,15 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   const [message, setMessage] = useState('')
-  const { phoneNumber } = selected[0]
+
+  const selectedStudentsValues = selected.map(
+    ({ values: { phoneNumber, studentFirstName, studentLastName } }) => ({
+      phoneNumber,
+      studentFirstName,
+      studentLastName
+    })
+  )
+  const { phoneNumber } = selectedStudentsValues[0]
   const sendText = async () => {
     const API_ENDPOINT =
       'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
