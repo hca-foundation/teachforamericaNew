@@ -11,7 +11,7 @@ class Messenger {
     const sms = {
       to: this.body.to,
       body: this.body.message,
-      from: '+18046210826'
+      from: '+16156221017'
     }
 
     // add image to sms if supplied
