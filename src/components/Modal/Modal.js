@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Table
+  // Table
 } from 'reactstrap'
 import './Modal.scss'
-import { API, graphqlOperation } from 'aws-amplify'
+// import { API, graphqlOperation } from 'aws-amplify'
 
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   const [message, setMessage] = useState('')

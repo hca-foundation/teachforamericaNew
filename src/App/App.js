@@ -4,14 +4,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  // Link,
+  // useRouteMatch,
+  // useParams
 } from 'react-router-dom'
 
 import GlobalStateProvider from '../state/globalStore';
 import FormPage from '../components/FormPage/FormPage';
-import Nav from '../components/Nav/Nav';
+// import Nav from '../components/Nav/Nav';
 import HomePage from '../components/HomePage/HomePage'
 
 import './App.scss'

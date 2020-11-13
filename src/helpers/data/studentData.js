@@ -17,13 +17,10 @@ export const fetchStudents = async () => {
 export const createNewStudent = async (formData) => {
 
   try {
-    // if (!parentFirstName || !phoneNumber) return
     const student = { ...formData, id: uuidv4() };
     console.log(student);
-    // setStudents([...students, student]);
-    //   setFormState(initialState);
     await API.graphql(graphqlOperation(createStudent, { input: student }));
   } catch (err) {
-    console.log('error creating student:', err);
+    console.error('Error creating student:', err);
   }
 }

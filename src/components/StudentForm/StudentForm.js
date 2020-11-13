@@ -11,7 +11,6 @@ const StudentForm = () => {
 
   useEffect(() => {
     dispatch(setFormDataAction(state.formData));
-    console.log(state.formData);
   }, [dispatch, state.formData]);
 
   return (

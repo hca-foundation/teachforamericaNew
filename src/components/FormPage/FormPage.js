@@ -21,6 +21,10 @@ const FormPage = () => {
       });
   };
 
+  useEffect(() => {
+    dispatch(setFormDataAction(formState))
+  }, [dispatch])
+
   return (
     <div className="Form col-6 mx-auto my-5 text-center">
         <h1>Academy Student Registration: Grades K-8</h1>

@@ -7,7 +7,7 @@ export const formState = {
   parentLastName: '',
   phoneNumber: '',
   email: '',
-  ethnicities: [],
+  // ethnicities: [],
   grossIncome: '',
   householdNumber: '',
   address: '',

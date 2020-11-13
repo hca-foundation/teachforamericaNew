@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "reactstrap";
+import React, { useState } from "react";
+// import { Button } from "reactstrap";
 import "./HomePage.scss";
 import TableComponent from "../TableComponent/TableComponent";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";

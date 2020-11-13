@@ -9,7 +9,6 @@ const ParentGuardianForm = () => {
   const { dispatch, state } = useContext(GlobalStateContext);
   useEffect(() => {
     dispatch(setFormDataAction(state.formData));
-    console.log(state.formData);
   }, [dispatch, state.formData]);
 
   return (
@@ -52,7 +51,7 @@ const ParentGuardianForm = () => {
             className='form-control'
             id='phoneNumber'
             placeholder='(xxx)xxx-xxxx'
-            maxLength='10'
+            maxLength='12'
             pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
             required
           />
