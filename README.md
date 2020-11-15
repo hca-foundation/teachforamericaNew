@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Outstanding Items
+
+### Table
+-	Select students via checkbox
+-	Move filter and sort functions to dropdown items on select menu
+-	Update styles to match comp
+
+Opensource component reference: [https://codesandbox.io/s/the-using-of-reactstrap-and-react-table-nczu2?from-embed=&file=/src/App.js:728-766](https://codesandbox.io/s/the-using-of-reactstrap-and-react-table-nczu2?from-embed=&file=/src/App.js:728-766)
