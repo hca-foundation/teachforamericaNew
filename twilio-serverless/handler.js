@@ -5,10 +5,10 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
 const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken) // eslint-disable-line
 //////////////
 //////////////
-console.log('process.env.TEST', process.env.TEST)
+
 module.exports.sendText = (event, context, callback) => {
   const messenger = new Messenger(twilioClient, event.body)
-  console.log('process.env.TEST INSIDE', process.env.TEST)
+  console.log('updated 001')
 
   console.log('context', context)
   console.log('event', event)

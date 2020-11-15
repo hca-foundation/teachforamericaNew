@@ -16,7 +16,7 @@ class Messenger {
     const sms = {
       to: 'test to',
       body: 'test message',
-      from: '+16156221017'
+      from: process.env.TWILIO_NUMBER
     }
     console.log('sms', sms)
     // add image to sms if supplied
