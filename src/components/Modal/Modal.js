@@ -4,7 +4,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter
   // Table
 } from 'reactstrap'
 import './Modal.scss'
@@ -13,21 +13,20 @@ import './Modal.scss'
 const ModalComponent = ({ isModalOpen, toggle, selected }) => {
   const [message, setMessage] = useState('')
 
+  // array of the phone numbers to send to
   const selectedStudentsValues = selected.map(
-    ({ values: { phoneNumber, studentFirstName, studentLastName } }) => ({
-      phoneNumber,
-      studentFirstName,
-      studentLastName
-    })
+    ({ values: { phoneNumber, studentFirstName, studentLastName } }) =>
+      `+${phoneNumber}`
   )
-  const { phoneNumber } = selectedStudentsValues[0]
+  // const { phoneNumber } = selectedStudentsValues[0]
   const sendText = async () => {
     const API_ENDPOINT =
       'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
     const data = JSON.stringify({
-      to: '+' + phoneNumber,
+      phoneNumbers: selectedStudentsValues,
       message
     })
+    console.log('data', data)
     const response = await fetch(API_ENDPOINT, {
       headers: {
         'Content-type': 'application/json'
