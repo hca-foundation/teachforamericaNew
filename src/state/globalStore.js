@@ -7,7 +7,32 @@ export const formState = {
   parentLastName: '',
   phoneNumber: '',
   email: '',
-  // ethnicities: [],
+  ethnicities: [
+    {
+      value: 'Alaskan, Native, or American Indian',
+      selected: false,
+    },
+    {
+      value: 'Asian',
+      selected: false,
+    },
+    {
+      value: 'Black or African-American',
+      selected: false,
+    },
+    {
+      value: 'Latino or Hispanic',
+      selected: false,
+    },
+    {
+      value: 'Middle Eastern, North African, or Arab American',
+      selected: false,
+    },
+    {
+      value: 'White',
+      selected: false,
+    },
+  ],
   grossIncome: '',
   householdNumber: '',
   address: '',
