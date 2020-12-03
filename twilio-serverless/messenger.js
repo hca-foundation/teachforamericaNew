@@ -1,25 +1,35 @@
 'use strict'
 
 class Messenger {
-  constructor (client, body) {
+  constructor (client, body, service) {
     this.client = client
     this.body = body
+    this.service = service
   }
 
-  send (event) {
-    // use twilio SDK to send text message
-    const sms = {
-      to: this.body.to,
-      body: this.body.message,
-      from: '+16156221017'
-    }
+  send () {
+    const { phoneNumbers } = this.body
+    console.log('phoneNumbers', phoneNumbers)
+    //limit of 10,000 numbers to send.  split request to send more
+    const boundNumbersToService = phoneNumbers.map(number =>
+      JSON.stringify({ binding_type: 'sms', address: number })
+    )
+    ////
+    console.log('boundNumbersToService', boundNumbersToService)
+    // sends messages
+    this.service.notifications
+      .create({
+        toBinding: boundNumbersToService,
+        body: this.body.message
+      })
+      .then(notification => {
+        console.log(notification)
+      })
+      .catch(err => {
+        console.error(err)
+      })
 
-    // add image to sms if supplied
-
-    sms.mediaUrl =
-      'https://live.staticflickr.com/5814/20058976494_0e6dc4caaf_q.jpg'
-
-    return this.client.messages.create(sms)
+    // sms.mediaUrl = 'https://live.staticflickr.com/5814/20058976494_0e6dc4caaf_q.jpg'
   }
 }
 

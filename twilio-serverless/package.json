@@ -12,6 +12,7 @@
   "dependencies": {
     "@aws-amplify/ui-react": "^0.2.25",
     "aws-amplify": "^3.3.5",
+    "dotenv": "^8.2.0",
     "twilio": "^3.50.0"
   },
   "devDependencies": {

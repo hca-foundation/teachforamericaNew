@@ -20,6 +20,7 @@ export const createStudent = /* GraphQL */ `
       studentGender
       studentRace
       districtName
+      grossIncome
       school
       description
     }

@@ -310,27 +310,27 @@ const grossIncomes = [
 const ethnicities = [
   {
     value: 'Alaskan, Native, or American Indian',
-    checked: false,
+    selected: false,
   },
   {
     value: 'Asian',
-    checked: false,
+    selected: false,
   },
   {
     value: 'Black or African-American',
-    checked: false,
+    selected: false,
   },
   {
     value: 'Latino or Hispanic',
-    checked: false,
+    selected: false,
   },
   {
     value: 'Middle Eastern, North African, or Arab American',
-    checked: false,
+    selected: false,
   },
   {
     value: 'White',
-    checked: false,
+    selected: false,
   },
 ];
 
