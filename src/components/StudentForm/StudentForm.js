@@ -246,7 +246,7 @@ const StudentForm = () => {
         </div>
         <div className="row mb-3">
             <div className="col-12">
-                <p>Does the student need to take medicine at school? (optional)</p>
+                <p>Does the student need to take medicine at school?</p>
                 <div className="form-check form-check-inline">
                     <input
                         onChange={() => state.formData.needMedicine = 'Yes'}
@@ -254,6 +254,7 @@ const StudentForm = () => {
                         type="radio"
                         name="medicine"
                         id="medicineTrue"
+                        required
                     />
                     <label className="form-check-label" htmlFor="medicineTrue">Yes</label>
                 </div>
