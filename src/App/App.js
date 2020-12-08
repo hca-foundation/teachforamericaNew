@@ -1,12 +1,8 @@
 import React from 'react'
-// import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  // Link,
-  // useRouteMatch,
-  // useParams
 } from 'react-router-dom'
 
 import GlobalStateProvider from '../state/globalStore';
