@@ -1,13 +1,25 @@
-.Nav {
-    display: block;
-    .nav-main {
-        background-color: rgb(12, 12, 61);
-        .logo {
-            font-size: 40px;
-            color: navy;
-            .for {
-                color: lightblue;
-            }
+.home-header {
+    background-color: rgb(7, 14, 40);
+    display: flex;
+    justify-content: space-between;
+    .logo-wrapper {
+      min-height: 5rem;
+      height: 100%;
+      max-width: 32rem;
+      padding: 0 1.5rem;
+      background-color: #fff;
+      .logo {
+        display: flex;
+        flex-direction: row;
+        font-size: 3rem;
+  
+        #logo-for {
+          color: rgb(0, 186, 203);
         }
+      }
+    }
+    .signout-wrapper {
+      height: 100%;
+      margin: 0.9rem;
     }
 }
