@@ -43,35 +43,38 @@ const SelfDeclarationForm = () => {
             affect your child’s participation in this program. Thank you!
         </p>
         
-        <div className="row">
+        {/* <div className="row">
             <div className="form-group col-12">
-                <label htmlFor="participatingStudentNames">Participating Student(s) Name(s) (optional)</label>
+                <label htmlFor="participatingStudentNames">Participating Student(s) Name(s)</label>
                 <input
                     onChange={(e) => state.formData.participatingStudents = e.target.value}
                     type="text"
                     className="form-control"
                     id="participatingStudentNames"
                     maxLength="100"
+                    required
                 />
             </div>
             <div className="form-group col-12">
-                <label htmlFor="participatingStudentAddress">Participating Student(s) Address (optional)</label>
+                <label htmlFor="participatingStudentAddress">Participating Student(s) Address</label>
                 <input
                     onChange={(e) => state.formData.participatingStudentAddress = e.target.value}
                     type="text"
                     className="form-control"
                     id="participatingStudentAddress"
                     maxLength="100"
+                    required
                 />
             </div>
-        </div>
-        <div className="row">
+        </div> */}
+        {/* <div className="row">
             <div className="form-group col-6">
-                <label htmlFor="householdNumber">Number in Household (optional)</label>
+                <label htmlFor="householdNumber">Number in Household</label>
                 <select
                     onChange={(e) => state.formData.householdNumber = e.target.value}
                     id="householdNumber"
                     className="form-control"
+                    required
                 >
                     <option>Select number</option>
                     {
@@ -84,11 +87,12 @@ const SelfDeclarationForm = () => {
         </div>
         <div className="row">
             <div className="form-group col-6">
-                <label htmlFor="grossIncome">Annual Gross Income (optional)</label>
+                <label htmlFor="grossIncome">Annual Gross Income</label>
                 <select
                     onChange={(e) => state.formData.grossIncome = e.target.value}
                     id="grossIncome"
                     className="form-control"
+                    required
                 >
                     <option>Select number</option>
                     {
@@ -102,7 +106,7 @@ const SelfDeclarationForm = () => {
         <div className="row mb-3">
             <div className="col-12 mt-2">
                 <FormGroup id="ethnicityCheckboxes">
-                    <Label for="ethnicityCheckboxes">Please check all race or ethnicity categories that apply to your student (optional)</Label>
+                    <Label for="ethnicityCheckboxes">Please check all race or ethnicity categories that apply to your student.</Label>
 
                     {
                         ethnicities.map((x, i) => (
@@ -116,7 +120,7 @@ const SelfDeclarationForm = () => {
                     }
                 </FormGroup>
             </div>
-        </div>
+        </div> */}
         <div className="row">
             <div className="col-12">
                 <h6>Publicity Release</h6>

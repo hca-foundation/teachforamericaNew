@@ -3,10 +3,7 @@ import React, { createContext, useReducer } from 'react';
 import globalReducer from './globalReducer';
 
 export const formState = {
-  parentFirstName: '',
-  parentLastName: '',
-  phoneNumber: '',
-  email: '',
+  
   ethnicities: [
     {
       value: 'Alaskan, Native, or American Indian',
@@ -48,8 +45,6 @@ export const formState = {
   mnpsId: '',
   needMedicine: '',
   needTransportation: '',
-  participatingStudents: '',
-  participatingStudentAddress: '',
   primaryLanguage: '',
   relationship: '',
   state: '',

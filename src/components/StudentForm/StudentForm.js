@@ -1,17 +1,41 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import formData from '../../helpers/data/formData';
 import { setFormDataAction } from '../../state/globalActions';
 import { GlobalStateContext } from '../../state/globalStore';
 
+import {
+    FormGroup,
+    Input,
+    Label,
+} from 'reactstrap';
+
 import './StudentForm.scss';
 
 const StudentForm = () => {
   const { dispatch, state } = useContext(GlobalStateContext);
+  const [ethnicities, setEthnicities] = useState([]);
 
   useEffect(() => {
     dispatch(setFormDataAction(state.formData));
   }, [dispatch, state.formData]);
+
+  useEffect(() => {
+    setEthnicities(formData.getEthnicities());
+  }, []);
+
+  const handleEthnicityChange = (e, i) => {
+    const ethnicityCheckboxes = [...ethnicities];
+
+    ethnicityCheckboxes[i].selected = e.target.checked;
+    setEthnicities(ethnicityCheckboxes);
+
+    const newFormData = state.formData;
+
+    newFormData.ethnicities = ethnicities;
+
+    dispatch(setFormDataAction(newFormData));
+  };
 
   return (
     <div className="StudentForm text-left py-4">
@@ -232,7 +256,7 @@ const StudentForm = () => {
                 />
             </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
             <div className="form-group col-12">
                 <label htmlFor="relationship">What is your relationship to the student(s)? (optional)</label>
                 <input
@@ -243,7 +267,7 @@ const StudentForm = () => {
                     maxLength="50"
                 />
             </div>
-        </div>
+        </div> */}
         <div className="row mb-3">
             <div className="col-12">
                 <p>Does the student need to take medicine at school?</p>
@@ -343,6 +367,59 @@ const StudentForm = () => {
                     maxLength="10"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 />
+            </div>
+        </div>
+        <div className="row">
+            <div className="form-group col-6">
+                <label htmlFor="householdNumber">Number in Household</label>
+                <select
+                    onChange={(e) => state.formData.householdNumber = e.target.value}
+                    id="householdNumber"
+                    className="form-control"
+                    required
+                >
+                    <option>Select number</option>
+                    {
+                        formData.getNumberInHousehold().map((num, i) => (
+                            <option key={i}>{num.value}</option>
+                        ))
+                    }
+                </select>
+            </div>
+        </div>
+        <div className="row">
+            <div className="form-group col-6">
+                <label htmlFor="grossIncome">Annual Gross Income</label>
+                <select
+                    onChange={(e) => state.formData.grossIncome = e.target.value}
+                    id="grossIncome"
+                    className="form-control"
+                    required
+                >
+                    <option>Select number</option>
+                    {
+                        formData.getIncomes().map((x, i) => (
+                            <option key={i}>{x.value}</option>
+                        ))
+                    }
+                </select>
+            </div>
+        </div>
+        <div className="row mb-3">
+            <div className="col-12 mt-2">
+                <FormGroup id="ethnicityCheckboxes">
+                    <Label for="ethnicityCheckboxes">Please check all race or ethnicity categories that apply to your student.</Label>
+                    {
+                        ethnicities.map((x, i) => (
+                            <FormGroup key={i} id={`ethnicity${i}`} check>
+                                <Label for={`ethnicity${i}`} check>
+                                    <Input type="checkbox" checked={x.selected} onChange={(e) => handleEthnicityChange(e, i)} />
+                                    {x.value}
+                                </Label>
+                            </FormGroup>
+                        ))
+                    }
+                </FormGroup>
             </div>
         </div>
         <button className="col-4 btn btn-secondary"><i className="fas fa-plus mr-2"></i>Add Another Student</button>
