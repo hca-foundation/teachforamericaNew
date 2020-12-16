@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-// import studentData from '../../helpers/data/studentData'
 import { setFormDataAction } from '../../state/globalActions';
 import { GlobalStateContext } from '../../state/globalStore';
 import './ParentGuardianForm.scss'
@@ -12,20 +11,20 @@ const ParentGuardianForm = ({ guardianIndex }) => {
     dispatch(setFormDataAction(state.formData));
   }, [dispatch, state.formData]);
 
-  // const parent = `parent${guardianIndex}`;
 
   const updateGuardian = (index, key, value) => {
-    let currentGuardian = state.formData.guardians[index];
+    const newState = { ...state.formData };
+    let currentGuardian = newState.guardians[index];
     if (currentGuardian === undefined) {
-      currentGuardian = { ...state.formData.guardians[index], id: uuidv4() };
+      currentGuardian = { ...newState.guardians[index], id: uuidv4() };
       currentGuardian[key] = value;
-      state.formData.guardians[index] = currentGuardian;
+      newState.guardians[index] = currentGuardian;
     } else {
       currentGuardian[key] = value;
-      state.formData.guardians[index] = currentGuardian;
+      newState.guardians[index] = currentGuardian;
     }
+    dispatch(setFormDataAction(newState));
   };
-
 
   return (
     <div className='ParentGuardianForm text-left py-4'>

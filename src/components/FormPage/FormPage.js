@@ -89,10 +89,9 @@ const FormPage = () => {
   //   "zipCode": "37216"
   // }
 
-
   useEffect(() => {
-    dispatch(setFormDataAction(formState))
-  }, [dispatch])
+    dispatch(setFormDataAction(state.formData))
+  }, [dispatch, state.formData]);
 
   return (
     <div className="Form col-6 mx-auto my-5 text-center">

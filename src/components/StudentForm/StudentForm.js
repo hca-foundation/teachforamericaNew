@@ -26,7 +26,8 @@ const StudentForm = ({ studentIndex }) => {
   };
 
   const handleEthnicityChange = (studentIndex, e, i) => {
-    let currentStudent = state.formData.students[studentIndex];
+    const newState = { ...state.formData };
+    let currentStudent = newState.students[studentIndex];
     const ethnicityCheckboxes = [...ethnicities];
     ethnicityCheckboxes[i].selected = e.target.checked;
     setEthnicities(ethnicityCheckboxes);
@@ -34,24 +35,27 @@ const StudentForm = ({ studentIndex }) => {
         currentStudent = { ...state.formData.students[studentIndex], id: uuidv4() }
         const string = concatString(ethnicityCheckboxes);
         currentStudent.ethnicities = string;
-        state.formData.students[studentIndex] = currentStudent;
+        newState.students[studentIndex] = currentStudent;
     } else {
         const string = concatString(ethnicityCheckboxes);
         currentStudent.ethnicities = string;
-        state.formData.students[studentIndex] = currentStudent;
+        newState.students[studentIndex] = currentStudent;
     }
+    dispatch(setFormDataAction(newState));
   };
 
   const updateStudent = (index, key, value) => {
-    let currentStudent = state.formData.students[index];
+    const newState = { ...state.formData };
+    let currentStudent = newState.students[index];
     if (currentStudent === undefined) {
-      currentStudent = { ...state.formData.students[index], id: uuidv4() };
+      currentStudent = { ...newState.students[index], id: uuidv4() };
       currentStudent[key] = value;
-      state.formData.students[index] = currentStudent;
+      newState.students[index] = currentStudent;
     } else {
       currentStudent[key] = value;
-      state.formData.students[index] = currentStudent;
+      newState.students[index] = currentStudent;
     }
+    dispatch(setFormDataAction(newState));
   };
 
   return (
@@ -275,18 +279,6 @@ const StudentForm = ({ studentIndex }) => {
                 />
             </div>
         </div>
-        {/* <div className="row">
-            <div className="form-group col-12">
-                <label htmlFor="relationship">What is your relationship to the student(s)? (optional)</label>
-                <input
-                    onChange={(e) => state.formData.relationship = e.target.value}
-                    type="text"
-                    className="form-control"
-                    id="relationship"
-                    maxLength="50"
-                />
-            </div>
-        </div> */}
         <div className="row mb-3">
             <div className="col-12">
                 <p>Does the student need to take medicine at school?</p>

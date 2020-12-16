@@ -1,35 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  FormGroup,
-  Input,
-  Label,
-} from 'reactstrap';
+import React, { useContext, useEffect } from 'react';
 
 import { GlobalStateContext } from '../../state/globalStore';
 import { setFormDataAction } from '../../state/globalActions';
-import formData from '../../helpers/data/formData';
 
 import './SelfDeclarationForm.scss';
 
 const SelfDeclarationForm = () => {
   const { state, dispatch } = useContext(GlobalStateContext);
-  const [ethnicities, setEthnicities] = useState([]);
 
   useEffect(() => {
-    setEthnicities(formData.getEthnicities());
-  }, []);
+    dispatch(setFormDataAction(state.formData));
+  }, [dispatch, state.formData]);
 
-  const handleEthnicityChange = (e, i) => {
-    const ethnicityCheckboxes = [...ethnicities];
-
-    ethnicityCheckboxes[i].selected = e.target.checked;
-    setEthnicities(ethnicityCheckboxes);
-
-    const newFormData = state.formData;
-
-    newFormData.ethnicities = ethnicities;
-
-    dispatch(setFormDataAction(newFormData));
+  const handleChange = (key, value) => {
+    const newState = { ...state.formData };
+    newState[key] = value;
+    dispatch(setFormDataAction(newState));
   };
 
   return (
@@ -42,85 +28,6 @@ const SelfDeclarationForm = () => {
             family’s income (before taxes come out). Income and/or ethnic identification will not
             affect your child’s participation in this program. Thank you!
         </p>
-        
-        {/* <div className="row">
-            <div className="form-group col-12">
-                <label htmlFor="participatingStudentNames">Participating Student(s) Name(s)</label>
-                <input
-                    onChange={(e) => state.formData.participatingStudents = e.target.value}
-                    type="text"
-                    className="form-control"
-                    id="participatingStudentNames"
-                    maxLength="100"
-                    required
-                />
-            </div>
-            <div className="form-group col-12">
-                <label htmlFor="participatingStudentAddress">Participating Student(s) Address</label>
-                <input
-                    onChange={(e) => state.formData.participatingStudentAddress = e.target.value}
-                    type="text"
-                    className="form-control"
-                    id="participatingStudentAddress"
-                    maxLength="100"
-                    required
-                />
-            </div>
-        </div> */}
-        {/* <div className="row">
-            <div className="form-group col-6">
-                <label htmlFor="householdNumber">Number in Household</label>
-                <select
-                    onChange={(e) => state.formData.householdNumber = e.target.value}
-                    id="householdNumber"
-                    className="form-control"
-                    required
-                >
-                    <option>Select number</option>
-                    {
-                        formData.getNumberInHousehold().map((num, i) => (
-                            <option key={i}>{num.value}</option>
-                        ))
-                    }
-                </select>
-            </div>
-        </div>
-        <div className="row">
-            <div className="form-group col-6">
-                <label htmlFor="grossIncome">Annual Gross Income</label>
-                <select
-                    onChange={(e) => state.formData.grossIncome = e.target.value}
-                    id="grossIncome"
-                    className="form-control"
-                    required
-                >
-                    <option>Select number</option>
-                    {
-                        formData.getIncomes().map((x, i) => (
-                            <option key={i}>{x.value}</option>
-                        ))
-                    }
-                </select>
-            </div>
-        </div>
-        <div className="row mb-3">
-            <div className="col-12 mt-2">
-                <FormGroup id="ethnicityCheckboxes">
-                    <Label for="ethnicityCheckboxes">Please check all race or ethnicity categories that apply to your student.</Label>
-
-                    {
-                        ethnicities.map((x, i) => (
-                            <FormGroup key={i} id={`ethnicity${i}`} check>
-                                <Label for={`ethnicity${i}`} check>
-                                    <Input type="checkbox" checked={x.selected} onChange={(e) => handleEthnicityChange(e, i)} />
-                                    {x.value}
-                                </Label>
-                            </FormGroup>
-                        ))
-                    }
-                </FormGroup>
-            </div>
-        </div> */}
         <div className="row">
             <div className="col-12">
                 <h6>Publicity Release</h6>
@@ -144,11 +51,25 @@ const SelfDeclarationForm = () => {
         <div className="row mb-3">
             <div className="col-12">
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="consent" id="consentTrue" value="true" />
+                    <input
+                        onChange={(e) => handleChange(e.target.name, e.target.value)}
+                        className="form-check-input"
+                        type="radio"
+                        name="consent"
+                        id="consentTrue"
+                        value="true"
+                    />
                     <label className="form-check-label" htmlFor="consentTrue">I consent</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="consent" id="consentFalse" value="false" />
+                    <input
+                        onChange={(e) => handleChange(e.target.name, e.target.value)}
+                        className="form-check-input"
+                        type="radio"
+                        name="consent"
+                        id="consentFalse"
+                        value="false"
+                    />
                     <label className="form-check-label" htmlFor="consentFalse">I do not consent</label>
                 </div>
             </div>
