@@ -1,26 +1,42 @@
 import React, { useContext, useEffect } from 'react'
-
+import { v4 as uuidv4 } from 'uuid';
 // import studentData from '../../helpers/data/studentData'
 import { setFormDataAction } from '../../state/globalActions';
 import { GlobalStateContext } from '../../state/globalStore';
 import './ParentGuardianForm.scss'
 
-const ParentGuardianForm = ({ guardianNumber }) => {
+const ParentGuardianForm = ({ guardianIndex }) => {
   const { dispatch, state } = useContext(GlobalStateContext);
+
   useEffect(() => {
     dispatch(setFormDataAction(state.formData));
   }, [dispatch, state.formData]);
-  const parent = `parent${guardianNumber}`;
+
+  // const parent = `parent${guardianIndex}`;
+
+  const updateGuardian = (index, key, value) => {
+    let currentGuardian = state.formData.guardians[index];
+    if (currentGuardian === undefined) {
+      currentGuardian = { ...state.formData.guardians[index], id: uuidv4() };
+      currentGuardian[key] = value;
+      state.formData.guardians[index] = currentGuardian;
+    } else {
+      currentGuardian[key] = value;
+      state.formData.guardians[index] = currentGuardian;
+    }
+  };
+
+
   return (
     <div className='ParentGuardianForm text-left py-4'>
-      <h5>Parent/Guardian Information</h5>
+      <h5>Parent/Guardian {`${guardianIndex + 1}`} Information</h5>
       <div className='row'>
         <div className='form-group col-6'>
           <label htmlFor='parentFirstName'>
             Parent/Guardian First Name
           </label>
           <input
-            onChange={(e) => state.formData[`${parent}FirstName`] = e.target.value}
+            onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
             type='text'
             className='form-control'
             id='parentFirstName'
@@ -33,7 +49,7 @@ const ParentGuardianForm = ({ guardianNumber }) => {
             Parent/Guardian Last Name
           </label>
           <input
-            onChange={(e) => state.formData[`${parent}LastName`] = e.target.value}
+            onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
             type='text'
             className='form-control'
             id='parentLastName'
@@ -46,7 +62,7 @@ const ParentGuardianForm = ({ guardianNumber }) => {
         <div className='form-group col-6'>
           <label htmlFor='phoneNumber'>Phone Number</label>
           <input
-            onChange={(e) => state.formData[`${parent}PhoneNumber`] = e.target.value}
+            onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
             type='tel'
             className='form-control'
             id='phoneNumber'
@@ -61,7 +77,7 @@ const ParentGuardianForm = ({ guardianNumber }) => {
         <div className='form-group col-12'>
           <label htmlFor='email'>Email (optional)</label>
           <input
-            onChange={(e) => state.formData[`${parent}Email`] = e.target.value}
+            onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
             type='email'
             className='form-control'
             id='email'
@@ -73,7 +89,7 @@ const ParentGuardianForm = ({ guardianNumber }) => {
             <div className="form-group col-12">
                 <label htmlFor="relationship">What is your relationship to the student(s)? (optional)</label>
                 <input
-                    onChange={(e) => state.formData[`${parent}Relationship`] = e.target.value}
+                    onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="relationship"

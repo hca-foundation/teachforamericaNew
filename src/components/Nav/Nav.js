@@ -10,7 +10,7 @@ const Nav = () => (
           {/* <div className='logo'>
             TEACH<div id='logo-for'>FOR</div>AMERICA
           </div> */}
-          <img class="logo-img" src="https://www.teachforamerica.org/themes/custom/polaris/assets/img/logo.svg" alt="Teach For America"/>
+          <img className="logo-img" src="https://www.teachforamerica.org/themes/custom/polaris/assets/img/logo.svg" alt="Teach For America"/>
         </div>
         <div className='signout-wrapper'>
           <AmplifySignOut />

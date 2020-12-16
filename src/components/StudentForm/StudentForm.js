@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import formData from '../../helpers/data/formData';
 import { setFormDataAction } from '../../state/globalActions';
 import { GlobalStateContext } from '../../state/globalStore';
@@ -12,40 +12,57 @@ import {
 
 import './StudentForm.scss';
 
-const StudentForm = () => {
+const StudentForm = ({ studentIndex }) => {
   const { dispatch, state } = useContext(GlobalStateContext);
   const [ethnicities, setEthnicities] = useState([]);
 
   useEffect(() => {
     dispatch(setFormDataAction(state.formData));
+    setEthnicities(formData.getEthnicities())
   }, [dispatch, state.formData]);
 
-  useEffect(() => {
-    setEthnicities(formData.getEthnicities());
-  }, []);
+  const concatString = (arr) => {
+      return arr.filter((x)=> x.selected).map(x => `${x.value}, `).join('');
+  };
 
-  const handleEthnicityChange = (e, i) => {
+  const handleEthnicityChange = (studentIndex, e, i) => {
+    let currentStudent = state.formData.students[studentIndex];
     const ethnicityCheckboxes = [...ethnicities];
-
     ethnicityCheckboxes[i].selected = e.target.checked;
     setEthnicities(ethnicityCheckboxes);
+    if (currentStudent === undefined) {
+        currentStudent = { ...state.formData.students[studentIndex], id: uuidv4() }
+        const string = concatString(ethnicityCheckboxes);
+        currentStudent.ethnicities = string;
+        state.formData.students[studentIndex] = currentStudent;
+    } else {
+        const string = concatString(ethnicityCheckboxes);
+        currentStudent.ethnicities = string;
+        state.formData.students[studentIndex] = currentStudent;
+    }
+  };
 
-    const newFormData = state.formData;
-
-    newFormData.ethnicities = ethnicities;
-
-    dispatch(setFormDataAction(newFormData));
+  const updateStudent = (index, key, value) => {
+    let currentStudent = state.formData.students[index];
+    if (currentStudent === undefined) {
+      currentStudent = { ...state.formData.students[index], id: uuidv4() };
+      currentStudent[key] = value;
+      state.formData.students[index] = currentStudent;
+    } else {
+      currentStudent[key] = value;
+      state.formData.students[index] = currentStudent;
+    }
   };
 
   return (
     <div className="StudentForm text-left py-4">
 
-        <h5>Student Information</h5>
+        <h5>Student {`${studentIndex + 1}`} Information</h5>
         <div className="row">
             <div className="form-group col-6">
                 <label htmlFor="studentFirstName">Student First Name</label>
                 <input
-                    onChange={(e) => state.formData.studentFirstName = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="studentFirstName"
@@ -56,7 +73,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="studentLastName">Student Last Name</label>
                 <input
-                    onChange={(e) => state.formData.studentLastName = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="studentLastName"
@@ -69,7 +86,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="address">Address</label>
                 <input
-                    onChange={(e) => state.formData.address = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="address"
@@ -82,7 +99,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="address2">Address 2 (optional)</label>
                 <input
-                    onChange={(e) => state.formData.address2 = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="address2"
@@ -94,7 +111,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="city">City</label>
                 <input
-                    onChange={(e) => state.formData.city = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="city"
@@ -105,8 +122,8 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="inputState">State</label>
                 <select
-                    onChange={(e) => state.formData.state = e.target.value}
-                    id="inputState"
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
+                    id="state"
                     className="form-control"
                     required
                 >
@@ -123,7 +140,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="zipCode">Zip Code</label>
                 <input
-                    onChange={(e) => state.formData.zipCode = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="zipCode"
@@ -136,10 +153,10 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="school">What school does the student currently attend?</label>
                 <input
-                    onChange={(e) => state.formData.currentSchool = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
-                    id="school"
+                    id="currentSchool"
                     maxLength="150"
                     required
                 />
@@ -149,8 +166,8 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="inputGrade">Student's Current Grade</label>
                 <select
-                    onChange={(e) => state.formData.currentGrade = e.target.value}
-                    id="inputGrade"
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
+                    id="currentGrade"
                     className="form-control"
                     required
                 >
@@ -167,8 +184,8 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="inputSchool">Which summer school site will this student attend?</label>
                 <select
-                    onChange={(e) => state.formData.summerSchool = e.target.value}
-                    id="inputSchool"
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
+                    id="summerSchool"
                     className="form-control"
                     required
                 >
@@ -185,10 +202,10 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="studentNumber">Student MNPS ID Number (optional)</label>
                 <input
-                    onChange={(e) => state.formData.mnpsId = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="number"
                     className="form-control"
-                    id="studentNumber"
+                    id="mnpsId"
                     maxLength="50"
                 />
             </div>
@@ -197,10 +214,10 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="birthday">Birthday (optional) </label>
                 <input
-                    onChange={(e) => state.formData.studentBirthday = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="date"
                     className="form-control"
-                    id="birthday"
+                    id="studentBirthday"
                 />
             </div>
         </div>
@@ -208,8 +225,8 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="gender">Gender</label>
                 <select
-                    onChange={(e) => state.formData.studentGender = e.target.value}
-                    id="gender"
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
+                    id="studentGender"
                     className="form-control"
                 >
                     <option>Select gender</option>
@@ -223,21 +240,23 @@ const StudentForm = () => {
                 <p>Are you requesting daily transporation to and from school?</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={() => state.formData.needTransportation = 'Yes'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="transportation"
+                        name="needTransportation"
                         id="transportationTrue"
+                        value="Yes"
                         required
                     />
                     <label className="form-check-label" htmlFor="transportationTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={() => state.formData.needTransportation = 'No'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="transportation"
+                        name="needTransporation"
+                        value="No"
                         id="transportationFalse"
                     />
                     <label className="form-check-label" htmlFor="transportationFalse">No</label>
@@ -248,7 +267,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="primaryLanguage">Primary language spoken at home (optional)</label>
                 <input
-                    onChange={(e) => state.formData.primaryLanguage = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="primaryLanguage"
@@ -273,21 +292,23 @@ const StudentForm = () => {
                 <p>Does the student need to take medicine at school?</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={() => state.formData.needMedicine = 'Yes'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="medicine"
+                        name="needMedicine"
                         id="medicineTrue"
+                        value="Yes"
                         required
                     />
                     <label className="form-check-label" htmlFor="medicineTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={() => state.formData.needMedicine = 'No'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="medicine"
+                        name="needMedicine"
+                        value="No"
                         id="medicineFalse"
                     />
                     <label className="form-check-label" htmlFor="medicineFalse">No</label>
@@ -298,10 +319,10 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="medicineCondition">If yes, please indicate the medicine and condition requiring medicine.</label>
                 <input
-                    onChange={(e) => state.formData.medicineConditionDesc = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
-                    id="medicineCondition"
+                    id="medicineConditionDesc"
                     maxLength="500"
                 />
             </div>
@@ -311,20 +332,20 @@ const StudentForm = () => {
                 <p>Does the student have allergies to medicine or food, etc? (optional)</p>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.hasAllergies = 'Yes'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="allergies"
+                        name="hasAllergies"
                         id="allergiesTrue"
                     />
                     <label className="form-check-label" htmlFor="allergiesTrue">Yes</label>
                 </div>
                 <div className="form-check form-check-inline">
                     <input
-                        onChange={(e) => state.formData.hasAllergies = 'No'}
+                        onChange={(e) => updateStudent(studentIndex, e.target.name, e.target.value)}
                         className="form-check-input"
                         type="radio"
-                        name="allergies"
+                        name="hasAllergies"
                         id="allergiesFalse"
                     />
                     <label className="form-check-label" htmlFor="allergiesFalse">No</label>
@@ -335,7 +356,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="allergiesList">If yes, please list.</label>
                 <input
-                    onChange={(e) => state.formData.allergiesList = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="allergiesList"
@@ -347,7 +368,7 @@ const StudentForm = () => {
             <div className="form-group col-12">
                 <label htmlFor="emergencyContact">In case of emergency during the school day, who should we contact? (optional)</label>
                 <input
-                    onChange={(e) => state.formData.emergencyContact = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="text"
                     className="form-control"
                     id="emergencyContact"
@@ -359,10 +380,10 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="formGroupExampleInput">Emergency Contact Phone Number (optional)</label>
                 <input
-                    onChange={(e) => state.formData.emergencyContactPhoneNumber = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     type="tel"
                     className="form-control"
-                    id="formGroupExampleInput"
+                    id="emergencyContactPhoneNumber"
                     placeholder="(xxx)xxx-xxxx"
                     maxLength="10"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -373,7 +394,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="householdNumber">Number in Household</label>
                 <select
-                    onChange={(e) => state.formData.householdNumber = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     id="householdNumber"
                     className="form-control"
                     required
@@ -391,7 +412,7 @@ const StudentForm = () => {
             <div className="form-group col-6">
                 <label htmlFor="grossIncome">Annual Gross Income</label>
                 <select
-                    onChange={(e) => state.formData.grossIncome = e.target.value}
+                    onChange={(e) => updateStudent(studentIndex, e.target.id, e.target.value)}
                     id="grossIncome"
                     className="form-control"
                     required
@@ -413,7 +434,7 @@ const StudentForm = () => {
                         ethnicities.map((x, i) => (
                             <FormGroup key={i} id={`ethnicity${i}`} check>
                                 <Label for={`ethnicity${i}`} check>
-                                    <Input type="checkbox" checked={x.selected} onChange={(e) => handleEthnicityChange(e, i)} />
+                                    <Input type="checkbox" checked={x.selected} onChange={(e) => handleEthnicityChange(studentIndex, e, i)} />
                                     {x.value}
                                 </Label>
                             </FormGroup>
@@ -422,7 +443,6 @@ const StudentForm = () => {
                 </FormGroup>
             </div>
         </div>
-        <button className="col-4 btn btn-secondary"><i className="fas fa-plus mr-2"></i>Add Another Student</button>
     </div>
   );
 };

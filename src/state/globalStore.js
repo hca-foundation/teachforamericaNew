@@ -1,60 +1,66 @@
 import React, { createContext, useReducer } from 'react';
+// import { v4 as uuidv4 } from 'uuid';
 
 import globalReducer from './globalReducer';
 
 export const formState = {
-  
-  ethnicities: [
-    {
-      value: 'Alaskan, Native, or American Indian',
-      selected: false,
-    },
-    {
-      value: 'Asian',
-      selected: false,
-    },
-    {
-      value: 'Black or African-American',
-      selected: false,
-    },
-    {
-      value: 'Latino or Hispanic',
-      selected: false,
-    },
-    {
-      value: 'Middle Eastern, North African, or Arab American',
-      selected: false,
-    },
-    {
-      value: 'White',
-      selected: false,
-    },
-  ],
-  grossIncome: '',
-  householdNumber: '',
-  address: '',
-  address2: '',
-  allergiesList: '',
-  city: '',
-  currentGrade: '',
-  currentSchool: '',
-  emergencyContact: '',
-  emergencyContactPhoneNumber: '',
-  hasAllergies: '',
-  medicineConditionDesc: '',
-  mnpsId: '',
-  needMedicine: '',
-  needTransportation: '',
-  primaryLanguage: '',
-  relationship: '',
-  state: '',
-  studentBirthday: '',
-  studentFirstName: '',
-  studentGender: '',
-  studentLastName: '',
-  summerSchool: '',
-  zipCode: '',
+  guardians: [],
+  students: []
 };
+  // students: [
+    // {
+    //   ethnicities: [
+    //     {
+    //       value: 'Alaskan, Native, or American Indian',
+    //       selected: false,
+    //     },
+    //     {
+    //       value: 'Asian',
+    //       selected: false,
+    //     },
+    //     {
+    //       value: 'Black or African-American',
+    //       selected: false,
+    //     },
+    //     {
+    //       value: 'Latino or Hispanic',
+    //       selected: false,
+    //     },
+    //     {
+    //       value: 'Middle Eastern, North African, or Arab American',
+    //       selected: false,
+    //     },
+    //     {
+    //       value: 'White',
+    //       selected: false,
+    //     },
+    //   ],
+      // grossIncome: '',
+      // householdNumber: '',
+      // address: '',
+      // address2: '',
+      // allergiesList: '',
+      // city: '',
+      // currentGrade: '',
+      // currentSchool: '',
+      // emergencyContact: '',
+      // emergencyContactPhoneNumber: '',
+      // hasAllergies: '',
+      // medicineConditionDesc: '',
+      // mnpsId: '',
+      // needMedicine: '',
+      // needTransportation: '',
+      // primaryLanguage: '',
+      // relationship: '',
+      // state: '',
+      // studentBirthday: '',
+      // studentFirstName: '',
+      // studentGender: '',
+      // studentLastName: '',
+      // summerSchool: '',
+      // zipCode: '',
+    // }
+  // ],
 
 export const initialState = {
   formData: formState,

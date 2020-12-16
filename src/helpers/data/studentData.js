@@ -1,5 +1,4 @@
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import { v4 as uuidv4 } from 'uuid';
 import { createStudent } from '../../graphql/mutations';
 import { getStudent, listStudents } from '../../graphql/queries';
 
@@ -17,7 +16,7 @@ export const fetchStudents = async () => {
 export const createNewStudent = async (formData) => {
 
   try {
-    const student = { ...formData, id: uuidv4() };
+    const student = { ...formData };
     console.log(student);
     await API.graphql(graphqlOperation(createStudent, { input: student }));
   } catch (err) {

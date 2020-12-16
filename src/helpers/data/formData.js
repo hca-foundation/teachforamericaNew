@@ -334,6 +334,14 @@ const ethnicities = [
   },
 ];
 
+const getDate = () => {
+  const dateObj = new Date();
+  const month = dateObj.getUTCMonth() + 1;
+  const day = dateObj.getUTCDate();
+  const year = dateObj.getUTCFullYear();
+  return year + "/" + month + "/" + day;
+};
+
 const getStates = () => states;
 
 const getGrades = () => grades;
@@ -346,7 +354,9 @@ const getIncomes = () => grossIncomes;
 
 const getEthnicities = () => ethnicities;
 
-const exportObj = {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  getDate,
   getStates,
   getGrades,
   getSummerSchoolSites,
@@ -354,5 +364,3 @@ const exportObj = {
   getIncomes,
   getEthnicities,
 };
-
-export default exportObj;

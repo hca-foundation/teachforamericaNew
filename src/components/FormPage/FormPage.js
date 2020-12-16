@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
 import { Button, Form } from 'reactstrap';
 
 import { GlobalStateContext, formState } from '../../state/globalStore';
 import { setFormDataAction } from '../../state/globalActions';
 import GuardianContainer from '../ParentGuardianForm/GuardianContainer';
-import ParentGuardianForm from '../ParentGuardianForm/ParentGuardianForm';
-import StudentForm from '../StudentForm/StudentForm';
+import StudentContainer from '../StudentForm/StudentContainer';
 import SelfDeclarationForm from '../SelfDeclarationForm/SelfDeclarationForm';
-import { createNewStudent } from '../../helpers/data/studentData';
+// import { createNewStudent } from '../../helpers/data/studentData';
+import formData from '../../helpers/data/formData';
 
 import './FormPage.scss';
 
@@ -17,11 +18,16 @@ const FormPage = () => {
 
   const handleSubmit = (data) => {
     // dispatch(setFormDataAction(formState));
-    console.log(data);
-    createNewStudent(data)
-      .then(() => {
-        dispatch(setFormDataAction(formState));
-      });
+    const enrollment = {
+      id: uuidv4(),
+      date: formData.getDate(),
+      ...data,
+    };
+    console.log(enrollment);
+    // createNewStudent(data)
+    //   .then(() => {
+    //     dispatch(setFormDataAction(formState));
+    //   });
   };
 
   // {
@@ -94,7 +100,7 @@ const FormPage = () => {
         <h4><em>All fields required unless noted optional</em></h4>
         <Form>
           <GuardianContainer />
-          <StudentForm />
+          <StudentContainer />
           <SelfDeclarationForm />
           <Button className="btn btn-dark col-3" onClick={() => handleSubmit(state.formData)}>Submit</Button>
         </Form>
