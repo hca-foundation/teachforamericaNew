@@ -5,7 +5,7 @@ import StudentTable from '../StudentTable/StudentTable'
 import './TableComponent.scss'
 import Modal from '../Modal/Modal'
 import { API, graphqlOperation } from 'aws-amplify'
-import { getStudent, listStudents } from '../../graphql/queries'
+// import { getStudent, listStudents } from '../../graphql/queries'
 import { CSVLink, CSVDownload } from 'react-csv'
 
 const columns = [
@@ -30,19 +30,19 @@ const TableComponent = () => {
   const [selected, setSelected] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  useEffect(() => {
-    fetchStudents()
-  }, [])
+  // useEffect(() => {
+  //   fetchStudents()
+  // }, [])
 
-  async function fetchStudents () {
-    try {
-      const studentData = await API.graphql(graphqlOperation(listStudents))
-      const allStudents = studentData.data.listStudents.items
-      setStudents(allStudents)
-    } catch (err) {
-      console.log('error fetching students')
-    }
-  }
+  // async function fetchStudents () {
+  //   try {
+  //     const studentData = await API.graphql(graphqlOperation(listStudents))
+  //     const allStudents = studentData.data.listStudents.items
+  //     setStudents(allStudents)
+  //   } catch (err) {
+  //     console.log('error fetching students')
+  //   }
+  // }
 
   return (
     <>
