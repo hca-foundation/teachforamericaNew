@@ -30,19 +30,14 @@ const TableComponent = () => {
   const [selected, setSelected] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // useEffect(() => {
-  //   fetchStudents()
-  // }, [])
-
-  // async function fetchStudents () {
-  //   try {
-  //     const studentData = await API.graphql(graphqlOperation(listStudents))
-  //     const allStudents = studentData.data.listStudents.items
-  //     setStudents(allStudents)
-  //   } catch (err) {
-  //     console.log('error fetching students')
-  //   }
-  // }
+  useEffect(async () => {
+    const response = await fetch(
+      'https://9hxir29w6i.execute-api.us-east-1.amazonaws.com/dev'
+    )
+    console.log('response', response)
+    let students = await response.json()
+    console.log('students', students)
+  }, [])
 
   return (
     <>
@@ -56,9 +51,7 @@ const TableComponent = () => {
 
       <aside className='options'>
         <CSVLink data={students}>
-          <Button raised color='secondary'>
-            Download CSV
-          </Button>
+          <Button color='secondary'>Download CSV</Button>
         </CSVLink>
         <div className='open-message-btn-wrapper'>
           <Button
