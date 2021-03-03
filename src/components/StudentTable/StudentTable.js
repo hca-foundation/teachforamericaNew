@@ -183,56 +183,57 @@ const StudentTable = ({
         </span>
       </div>
       <Table {...getTableProps()} striped hover bordered responsive>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <>
-              <tr className='theader' {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    style={{ whiteSpace: 'nowrap' }}
-                  >
-                    {column.render('Header')}
-                    <span className={'ml-2'}>
-                      {!column.notShowSortingDisplay ? (
-                        column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <SortDown color={'black'} size={15} />
+        {headerGroups.length > 0 && (
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <>
+                <tr className='theader' {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column, i) => (
+                    <th
+                      key={i}
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      {column.render('Header')}
+                      <span className={'ml-2'}>
+                        {!column.notShowSortingDisplay ? (
+                          column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <SortDown color={'black'} size={15} />
+                            ) : (
+                              <SortUp color={'black'} size={15} />
+                            )
                           ) : (
-                            <SortUp color={'black'} size={15} />
+                            // <FilterCircle color={"black"} size={15} />
+                            <span></span>
                           )
                         ) : (
-                          // <FilterCircle color={"black"} size={15} />
-                          <span></span>
-                        )
-                      ) : (
-                        ''
-                      )}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-              {switchSearch ? (
-                <tr style={{ backgroundColor: 'aliceBlue' }}>
-                  {headerGroup.headers.map((column, index) => (
-                    <th className='tfilter'>
-                      {column.canFilter ? (
-                        <FormGroup className='mb-1'>
-                          <Label className='divFilter mb-0'>
-                            Filter {column.render('Header')} :
-                          </Label>
-                          {column.render('Filter')}
-                        </FormGroup>
-                      ) : null}
+                          ''
+                        )}
+                      </span>
                     </th>
                   ))}
                 </tr>
-              ) : (
-                ''
-              )}
-            </>
-          ))}
-        </thead>
+                {switchSearch ? (
+                  <tr style={{ backgroundColor: 'aliceBlue' }}>
+                    {headerGroup.headers.map((column, index) => (
+                      <th className='tfilter'>
+                        {column.canFilter ? (
+                          <FormGroup className='mb-1'>
+                            <Label className='divFilter mb-0'>
+                              Filter {column.render('Header')} :
+                            </Label>
+                            {column.render('Filter')}
+                          </FormGroup>
+                        ) : null}
+                      </th>
+                    ))}
+                  </tr>
+                ) : null}
+              </>
+            ))}
+          </thead>
+        )}
         {loading ? (
           <tbody>
             <tr>
@@ -256,10 +257,11 @@ const StudentTable = ({
                 {page.map((row, i) => {
                   prepareRow(row)
                   return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => {
+                    <tr key={i} {...row.getRowProps()}>
+                      {row.cells.map((cell, i) => {
                         return (
                           <td
+                            key={i}
                             {...cell.getCellProps({
                               className: cell.column.className
                             })}

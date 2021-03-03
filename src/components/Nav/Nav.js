@@ -16,9 +16,9 @@ const Nav = () => (
           alt='Teach For America'
         />
       </div>
-      {/* <div className='signout-wrapper'>
-          <AmplifySignOut />
-        </div> */}
+      <div className='signout-wrapper'>
+        <AmplifySignOut />
+      </div>
     </nav>
   </div>
 )

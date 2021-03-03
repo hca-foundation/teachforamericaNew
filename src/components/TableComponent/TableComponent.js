@@ -4,7 +4,8 @@ import StudentTable from '../StudentTable/StudentTable'
 // import "./StudentTable.scss";
 import './TableComponent.scss'
 import Modal from '../Modal/Modal'
-import { API, graphqlOperation } from 'aws-amplify'
+
+import { API, Auth } from 'aws-amplify'
 // import { getStudent, listStudents } from '../../graphql/queries'
 import { CSVLink, CSVDownload } from 'react-csv'
 
@@ -31,14 +32,10 @@ const TableComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(async () => {
-    const response = await fetch(
-      'https://9hxir29w6i.execute-api.us-east-1.amazonaws.com/dev'
-    )
-    console.log('response', response)
-    let students = await response.json()
-    console.log('students', students)
+    API.get('t4aApi', '/students/id').then(res => setStudents(res))
   }, [])
 
+  console.log('students PRE RENDER', students)
   return (
     <>
       {isModalOpen && (

@@ -1,0 +1,45 @@
+{
+    "paths": [
+        {
+            "name": "/students",
+            "lambdaFunction": "t4aFunction",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET"
+                ]
+            }
+        }
+    ],
+    "resourceName": "t4aApi",
+    "apiName": "t4aApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "t4aFunction"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-teachforamerica-dev-03201-authRole",
+        "unAuthRoleName": "amplify-teachforamerica-dev-03201-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "t4aFunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

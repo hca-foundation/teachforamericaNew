@@ -17,7 +17,6 @@ const FormPage = () => {
   const { state, dispatch } = useContext(GlobalStateContext)
 
   const handleSubmit = data => {
-    // dispatch(setFormDataAction(formState));
     const enrollment = {
       id: uuidv4(),
       date: formData.getDate(),
