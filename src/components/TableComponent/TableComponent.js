@@ -32,7 +32,9 @@ const TableComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(async () => {
-    API.get('t4aApi', '/students/id').then(res => setStudents(res))
+    const apiName = 't4aApi'
+    const path = '/students/id'
+    API.get(apiName, path).then(res => setStudents(res))
   }, [])
 
   console.log('students PRE RENDER', students)

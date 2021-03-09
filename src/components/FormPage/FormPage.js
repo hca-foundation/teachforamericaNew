@@ -8,7 +8,7 @@ import { setFormDataAction } from '../../state/globalActions'
 import GuardianContainer from '../ParentGuardianForm/GuardianContainer'
 import StudentContainer from '../StudentForm/StudentContainer'
 import SelfDeclarationForm from '../SelfDeclarationForm/SelfDeclarationForm'
-// import { createNewStudent } from '../../helpers/data/studentData';
+import { createNewStudent } from '../../helpers/data/studentData'
 import formData from '../../helpers/data/formData'
 
 import './FormPage.scss'
@@ -16,77 +16,97 @@ import './FormPage.scss'
 const FormPage = () => {
   const { state, dispatch } = useContext(GlobalStateContext)
 
-  const handleSubmit = data => {
-    const enrollment = {
-      id: uuidv4(),
-      date: formData.getDate(),
-      ...data
-    }
-    console.log(enrollment)
-    // createNewStudent(data)
-    //   .then(() => {
-    //     dispatch(setFormDataAction(formState));
-    //   });
+  const handleSubmit = ({ guardians, students, consent }) => {
+    console.log('students', students)
+    let allGuardians = {}
+    guardians.forEach(guardian => {
+      Object.assign(allGuardians, guardian)
+    })
+    students.forEach(student => {
+      console.log('student', student)
+      const enrollment = {
+        id: uuidv4(),
+        date: formData.getDate(),
+        ...allGuardians,
+        ...student,
+        consent
+      }
+      console.log(enrollment)
+      createNewStudent(enrollment)
+    })
+    // .then(() => {
+    //   dispatch(setFormDataAction(mockState))
+    // })
   }
 
-  // {
-  //   "parentFirstName": "David",
-  //   "parentLastName": "Everett",
-  //   "phoneNumber": "2173431348",
-  //   "email": "davideverett1989@gmail.com",
-  //   "ethnicities": [
-  //     {
-  //       "value": "Alaskan, Native, or American Indian",
-  //       "selected": false
-  //     },
-  //     {
-  //       "value": "Asian",
-  //       "selected": true
-  //     },
-  //     {
-  //       "value": "Black or African-American",
-  //       "selected": true
-  //     },
-  //     {
-  //       "value": "Latino or Hispanic",
-  //       "selected": false
-  //     },
-  //     {
-  //       "value": "Middle Eastern, North African, or Arab American",
-  //       "selected": false
-  //     },
-  //     {
-  //       "value": "White",
-  //       "selected": true
-  //     }
-  //   ],
-  //   "grossIncome": "$46,435 - $54,426",
-  //   "householdNumber": "2 persons",
-  //   "address": "123 Whatever St.",
-  //   "address2": "",
-  //   "allergiesList": "",
-  //   "city": "Nashville",
-  //   "currentGrade": "5th Grade",
-  //   "currentSchool": "Nashville Software School",
-  //   "emergencyContact": "Mom",
-  //   "emergencyContactPhoneNumber": "3334444555",
-  //   "hasAllergies": "No",
-  //   "medicineConditionDesc": "Tylenol",
-  //   "mnpsId": "35132515",
-  //   "needMedicine": "Yes",
-  //   "needTransportation": "No",
-  //   "participatingStudents": "",
-  //   "participatingStudentAddress": "",
-  //   "primaryLanguage": "English",
-  //   "relationship": "Father",
-  //   "state": "Tennessee",
-  //   "studentBirthday": "2020-12-02",
-  //   "studentFirstName": "James",
-  //   "studentGender": "Male",
-  //   "studentLastName": "Doe",
-  //   "summerSchool": "Gra-Mar Elementary (current K-4)",
-  //   "zipCode": "37216"
-  // }
+  let foo = {
+    guardian1FirstName: 'Adam',
+    guardian1LastName: 'Jones',
+    guardian1PhoneNumber: '9987438888',
+    guardian1Email: 'qwer@gmail.com',
+    guardian2FirstName: 'Jane',
+    guardian2LastName: 'Smith',
+    guardian2PhoneNumber: '1117438888',
+    guardian2Email: 'JaneSmith@gmail.com',
+    guardian3FirstName: '',
+    guardian3LastName: '',
+    guardian3PhoneNumber: '',
+    guardian3Email: '',
+    consent: true,
+    ethnicities: [
+      {
+        value: 'Alaskan, Native, or American Indian',
+        selected: false
+      },
+      {
+        value: 'Asian',
+        selected: true
+      },
+      {
+        value: 'Black or African-American',
+        selected: true
+      },
+      {
+        value: 'Latino or Hispanic',
+        selected: false
+      },
+      {
+        value: 'Middle Eastern, North African, or Arab American',
+        selected: false
+      },
+      {
+        value: 'White',
+        selected: true
+      }
+    ],
+    grossIncome: '$46,435 - $54,426',
+    householdNumber: '2 persons',
+    address: '123 Whatever St.',
+    address2: '',
+    allergiesList: '',
+    city: 'Nashville',
+    currentGrade: '5th Grade',
+    currentSchool: 'Nashville Software School',
+    emergencyContact: 'Mom',
+    emergencyContactPhoneNumber: '3334444555',
+    hasAllergies: 'No',
+    medicineConditionDesc: 'Tylenol',
+    allergiesList: 'beeeez',
+    mnpsId: '35132515',
+    needMedicine: 'Yes',
+    needTransportation: 'No',
+    participatingStudents: '',
+    participatingStudentAddress: '',
+    primaryLanguage: 'English',
+    relationship: 'Father',
+    state: 'Tennessee',
+    studentBirthday: '2020-12-02',
+    studentFirstName: 'test',
+    studentGender: 'Dos',
+    studentLastName: 'Doe',
+    summerSchool: 'Gra-Mar Elementary (current K-4)',
+    zipCode: '37216'
+  }
 
   useEffect(() => {
     dispatch(setFormDataAction(state.formData))
