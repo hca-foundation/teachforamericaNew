@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "teachforamericafd094a3a_identitypool_fd094a3a",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "teachffd094a3a",
-    "userPoolName": "teachforamericafd094a3a_userpool_fd094a3a",
+    "identityPoolName": "teachforamerica2c3663c6_identitypool_2c3663c6",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "teachf2c3663c6",
+    "userPoolName": "teachforamerica2c3663c6_userpool_2c3663c6",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "teachffd094a3a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "teachf2c3663c6_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "teachforamericafd094a3a",
+    "resourceName": "teachforamerica2c3663c6",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -48,11 +48,6 @@
     "usernameAttributes": [
         "email"
     ],
-    "triggers": "{}",
     "userPoolGroupList": [],
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": [],
     "dependsOn": []
 }

@@ -1,27 +1,10 @@
 {
-    "api": {
-        "teachforamerica": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [],
-                    "defaultAuthentication": {
-                        "authenticationType": "API_KEY",
-                        "apiKeyConfig": {
-                            "description": "tfakey",
-                            "apiKeyExpirationDays": "365"
-                        }
-                    }
-                }
-            }
-        }
-    },
     "auth": {
-        "teachforamericafd094a3a": {
+        "teachforamerica2c3663c6": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
-            "dependsOn": []
+            "dependsOn": [],
+            "customAuth": false
         },
         "userPoolGroups": {
             "service": "Cognito-UserPool-Groups",
@@ -29,12 +12,55 @@
             "dependsOn": [
                 {
                     "category": "auth",
-                    "resourceName": "teachforamericafd094a3a",
+                    "resourceName": "teachforamerica2c3663c6",
                     "attributes": [
                         "UserPoolId",
                         "AppClientIDWeb",
                         "AppClientID",
                         "IdentityPoolId"
+                    ]
+                }
+            ]
+        }
+    },
+    "storage": {
+        "t4aTable": {
+            "service": "DynamoDB",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "function": {
+        "t4aFunction": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda",
+            "dependsOn": [
+                {
+                    "category": "storage",
+                    "resourceName": "t4aTable",
+                    "attributes": [
+                        "Name",
+                        "Arn"
+                    ],
+                    "attributeEnvMap": {
+                        "Name": "TABLE_NAME",
+                        "Arn": "TABLE_ARN"
+                    }
+                }
+            ]
+        }
+    },
+    "api": {
+        "t4aApi": {
+            "service": "API Gateway",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "t4aFunction",
+                    "attributes": [
+                        "Name",
+                        "Arn"
                     ]
                 }
             ]

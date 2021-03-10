@@ -1,23 +1,23 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authteachforamericafd094a3aUserPoolId": {
+        "authteachforamerica2c3663c6UserPoolId": {
             "Type": "String",
-            "Default": "authteachforamericafd094a3aUserPoolId"
+            "Default": "authteachforamerica2c3663c6UserPoolId"
         },
         
-        "authteachforamericafd094a3aIdentityPoolId": {
+        "authteachforamerica2c3663c6IdentityPoolId": {
             "Type": "String",
-            "Default": "authteachforamericafd094a3aIdentityPoolId"
+            "Default": "authteachforamerica2c3663c6IdentityPoolId"
         },
         
-        "authteachforamericafd094a3aAppClientID": {
+        "authteachforamerica2c3663c6AppClientID": {
             "Type": "String",
-            "Default": "authteachforamericafd094a3aAppClientID"
+            "Default": "authteachforamerica2c3663c6AppClientID"
         },
-        "authteachforamericafd094a3aAppClientIDWeb": {
+        "authteachforamerica2c3663c6AppClientIDWeb": {
             "Type": "String",
-            "Default": "authteachforamericafd094a3aAppClientIDWeb"
+            "Default": "authteachforamerica2c3663c6AppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -41,26 +41,26 @@
     },
     "Resources": {
     
-        "adminGroup": {
+        "adminsGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
-              "GroupName" : "admin",
+              "GroupName" : "admins",
               "Precedence" : 1,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
-                    "adminGroupRole",
+                    "adminsGroupRole",
                     "Arn"
                 ]
               },
               
               "UserPoolId" : {
-                "Ref": "authteachforamericafd094a3aUserPoolId"
+                "Ref": "authteachforamerica2c3663c6UserPoolId"
               } 
             }
         },
         
-        "adminGroupRole": {
+        "adminsGroupRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName":{
@@ -68,9 +68,9 @@
                         "",
                         [
                           {
-                            "Ref": "authteachforamericafd094a3aUserPoolId"
+                            "Ref": "authteachforamerica2c3663c6UserPoolId"
                           },
-                          "-adminGroupRole"
+                          "-adminsGroupRole"
                         ]
                     ]
                 },
@@ -85,7 +85,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authteachforamericafd094a3aIdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authteachforamerica2c3663c6IdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -111,7 +111,7 @@
                                 "",
                                 [
                                   
-                                  "teachforamericafd094a3a",
+                                  "teachforamerica2c3663c6",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -270,16 +270,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authteachforamericafd094a3aIdentityPoolId"
+                    "Ref": "authteachforamerica2c3663c6IdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authteachforamericafd094a3aUserPoolId"
+                    "Ref": "authteachforamerica2c3663c6UserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authteachforamericafd094a3aAppClientIDWeb"
+                    "Ref": "authteachforamerica2c3663c6AppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authteachforamericafd094a3aAppClientID"
+                    "Ref": "authteachforamerica2c3663c6AppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"
@@ -295,10 +295,10 @@
     
     "Outputs": {
       
-        "adminGroupRole": {
+        "adminsGroupRole": {
             "Value": {
                 "Fn::GetAtt": [
-                    "adminGroupRole",
+                    "adminsGroupRole",
                     "Arn"
                 ]
             }

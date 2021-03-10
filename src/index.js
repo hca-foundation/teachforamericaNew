@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Amplify from '@aws-amplify/core'
-import { Auth } from 'aws-amplify'
 import App from './App/App'
 import './styles/index.scss'
 //import reportWebVitals from './reportWebVitals';
-import awsExports from './aws-exports'
+import Amplify from '@aws-amplify/core'
+import { Auth } from 'aws-amplify'
+import awsconfig from './aws-exports'
 
-Amplify.configure(awsExports)
-
+Amplify.configure(awsconfig)
+Auth.configure(awsconfig)
 ReactDOM.render(<App />, document.getElementById('root'))
 
 // If you want to start measuring performance in your app, pass a function

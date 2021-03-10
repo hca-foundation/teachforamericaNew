@@ -15,13 +15,21 @@ const ModalComponent = ({ isModalOpen, toggle, selected }) => {
 
   // array of the phone numbers to send to
   const selectedStudentsValues = selected.map(
-    ({ values: { phoneNumber, studentFirstName, studentLastName } }) =>
-      `+${phoneNumber}`
+    ({
+      values: {
+        guardian1PhoneNumber: phoneNumber,
+        studentFirstName,
+        studentLastName
+      }
+    }) => {
+      const formattedNumber = `+${phoneNumber.replace(/-/g, '')}`
+      return formattedNumber
+    }
   )
   // const { phoneNumber } = selectedStudentsValues[0]
   const sendText = async () => {
     const API_ENDPOINT =
-      'https://8rwc658m85.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
+      'https://9hxir29w6i.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
     const data = JSON.stringify({
       phoneNumbers: selectedStudentsValues,
       message

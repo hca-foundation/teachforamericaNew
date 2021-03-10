@@ -4,46 +4,40 @@ import StudentTable from '../StudentTable/StudentTable'
 // import "./StudentTable.scss";
 import './TableComponent.scss'
 import Modal from '../Modal/Modal'
-import { API, graphqlOperation } from 'aws-amplify'
-import { getStudent, listStudents } from '../../graphql/queries'
+import columns from './columns'
+import { API, Auth } from 'aws-amplify'
+// import { getStudent, listStudents } from '../../graphql/queries'
 import { CSVLink, CSVDownload } from 'react-csv'
 
-const columns = [
-  { accessor: 'parentFirstName', Header: 'Parent First Name' },
-  { accessor: 'parentLastName', Header: 'Parent Last Name' },
-  { accessor: 'phoneNumber', Header: 'Phone' },
-  { accessor: 'email', Header: 'Email' },
-  { accessor: 'primaryLanguage', Header: 'Primary Language' },
-  { accessor: 'relationship', Header: 'Relationship' },
-  { accessor: 'studentFirstName', Header: 'Student First Name' },
-  { accessor: 'studentLastName', Header: 'Student Last Name' },
-  { accessor: 'studentBirthday', Header: 'Student Birthday' },
-  { accessor: 'studentGender', Header: 'Student Gender' },
-  { accessor: 'studentRace', Header: 'Student Race' },
-  { accessor: 'districtName', Header: 'District' },
-  { accessor: 'school', Header: 'School' },
-  { accessor: 'description', Header: 'Description' }
-]
+// const columns = [
+//   { accessor: 'parentFirstName', Header: 'Parent First Name' },
+//   { accessor: 'parentLastName', Header: 'Parent Last Name' },
+//   { accessor: 'phoneNumber', Header: 'Phone' },
+//   { accessor: 'email', Header: 'Email' },
+//   { accessor: 'primaryLanguage', Header: 'Primary Language' },
+//   { accessor: 'relationship', Header: 'Relationship' },
+//   { accessor: 'studentFirstName', Header: 'Student First Name' },
+//   { accessor: 'studentLastName', Header: 'Student Last Name' },
+//   { accessor: 'studentBirthday', Header: 'Student Birthday' },
+//   { accessor: 'studentGender', Header: 'Student Gender' },
+//   { accessor: 'studentRace', Header: 'Student Race' },
+//   { accessor: 'districtName', Header: 'District' },
+//   { accessor: 'school', Header: 'School' },
+//   { accessor: 'description', Header: 'Description' }
+// ]
 
 const TableComponent = () => {
   const [students, setStudents] = useState([])
   const [selected, setSelected] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  useEffect(() => {
-    fetchStudents()
+  useEffect(async () => {
+    const apiName = 't4aApi'
+    const path = '/students/id'
+    API.get(apiName, path).then(res => setStudents(res))
   }, [])
 
-  async function fetchStudents () {
-    try {
-      const studentData = await API.graphql(graphqlOperation(listStudents))
-      const allStudents = studentData.data.listStudents.items
-      setStudents(allStudents)
-    } catch (err) {
-      console.log('error fetching students')
-    }
-  }
-
+  console.log('students PRE RENDER', students)
   return (
     <>
       {isModalOpen && (
@@ -56,9 +50,7 @@ const TableComponent = () => {
 
       <aside className='options'>
         <CSVLink data={students}>
-          <Button raised color='secondary'>
-            Download CSV
-          </Button>
+          <Button color='secondary'>Download CSV</Button>
         </CSVLink>
         <div className='open-message-btn-wrapper'>
           <Button
