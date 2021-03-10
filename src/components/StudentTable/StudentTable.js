@@ -185,9 +185,13 @@ const StudentTable = ({
       <Table {...getTableProps()} striped hover bordered responsive>
         {headerGroups.length > 0 && (
           <thead>
-            {headerGroups.map(headerGroup => (
+            {headerGroups.map((headerGroup, idx) => (
               <>
-                <tr className='theader' {...headerGroup.getHeaderGroupProps()}>
+                <tr
+                  key={idx}
+                  className='theader'
+                  {...headerGroup.getHeaderGroupProps()}
+                >
                   {headerGroup.headers.map((column, i) => (
                     <th
                       key={i}
@@ -217,7 +221,7 @@ const StudentTable = ({
                 {switchSearch ? (
                   <tr style={{ backgroundColor: 'aliceBlue' }}>
                     {headerGroup.headers.map((column, index) => (
-                      <th className='tfilter'>
+                      <th key={index} className='tfilter'>
                         {column.canFilter ? (
                           <FormGroup className='mb-1'>
                             <Label className='divFilter mb-0'>
