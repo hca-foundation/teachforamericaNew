@@ -1,31 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Container, Button } from 'reactstrap'
 import StudentTable from '../StudentTable/StudentTable'
-// import "./StudentTable.scss";
+
 import './TableComponent.scss'
 import Modal from '../Modal/Modal'
 import columns from './columns'
 import { API, Auth } from 'aws-amplify'
-// import { getStudent, listStudents } from '../../graphql/queries'
 import { CSVLink, CSVDownload } from 'react-csv'
-
-// const columns = [
-//   { accessor: 'parentFirstName', Header: 'Parent First Name' },
-//   { accessor: 'parentLastName', Header: 'Parent Last Name' },
-//   { accessor: 'phoneNumber', Header: 'Phone' },
-//   { accessor: 'email', Header: 'Email' },
-//   { accessor: 'primaryLanguage', Header: 'Primary Language' },
-//   { accessor: 'relationship', Header: 'Relationship' },
-//   { accessor: 'studentFirstName', Header: 'Student First Name' },
-//   { accessor: 'studentLastName', Header: 'Student Last Name' },
-//   { accessor: 'studentBirthday', Header: 'Student Birthday' },
-//   { accessor: 'studentGender', Header: 'Student Gender' },
-//   { accessor: 'studentRace', Header: 'Student Race' },
-//   { accessor: 'districtName', Header: 'District' },
-//   { accessor: 'school', Header: 'School' },
-//   { accessor: 'description', Header: 'Description' }
-// ]
-
+import { ToastContainer, toast } from 'react-toastify'
 const TableComponent = () => {
   const [students, setStudents] = useState([])
   const [selected, setSelected] = useState([])
@@ -37,17 +19,23 @@ const TableComponent = () => {
     API.get(apiName, path).then(res => setStudents(res))
   }, [])
 
-  console.log('students PRE RENDER', students)
+  const messageSent = msg => {
+    setIsModalOpen(false)
+    setSelected([])
+    toast(msg)
+  }
   return (
     <>
       {isModalOpen && (
         <Modal
+          messageSent={messageSent}
           selected={selected}
+          setSelected={setSelected}
           isModalOpen={isModalOpen}
           toggle={setIsModalOpen}
         />
       )}
-
+      <ToastContainer />
       <aside className='options'>
         <CSVLink data={students}>
           <Button color='secondary'>Download CSV</Button>

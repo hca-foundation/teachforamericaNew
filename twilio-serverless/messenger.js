@@ -9,13 +9,11 @@ class Messenger {
 
   send () {
     const { phoneNumbers } = this.body
-    console.log('phoneNumbers', phoneNumbers)
     //limit of 10,000 numbers to send.  split request to send more
     const boundNumbersToService = phoneNumbers.map(number =>
       JSON.stringify({ binding_type: 'sms', address: number })
     )
     ////
-    console.log('boundNumbersToService', boundNumbersToService)
     // sends messages
     this.service.notifications
       .create({
@@ -23,7 +21,7 @@ class Messenger {
         body: this.body.message
       })
       .then(notification => {
-        console.log(notification)
+        return notification.body
       })
       .catch(err => {
         console.error(err)

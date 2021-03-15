@@ -17,13 +17,11 @@ const FormPage = () => {
   const { state, dispatch } = useContext(GlobalStateContext)
 
   const handleSubmit = ({ guardians, students, consent }) => {
-    console.log('students', students)
     let allGuardians = {}
     guardians.forEach(guardian => {
       Object.assign(allGuardians, guardian)
     })
     students.forEach(student => {
-      console.log('student', student)
       const enrollment = {
         id: uuidv4(),
         date: formData.getDate(),
@@ -31,7 +29,6 @@ const FormPage = () => {
         ...student,
         consent
       }
-      console.log(enrollment)
       createNewStudent(enrollment)
     })
     // .then(() => {

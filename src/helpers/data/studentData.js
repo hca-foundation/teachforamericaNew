@@ -6,7 +6,6 @@ export const createNewStudent = async formData => {
   const myInit = {
     body: formData
   }
-  console.log('formData', formData)
   try {
     API.post(apiName, path, myInit)
       .then(response => {

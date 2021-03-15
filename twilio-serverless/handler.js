@@ -10,10 +10,6 @@ const service = twilioClient.notify.services(
 
 module.exports.sendText = (event, context, callback) => {
   const messenger = new Messenger(twilioClient, event.body, service)
-  console.log('updated 003')
-
-  console.log('context', context)
-  console.log('event', event)
 
   const response = {
     headers: { 'Access-Control-Allow-Origin': '*' }, // CORS requirement

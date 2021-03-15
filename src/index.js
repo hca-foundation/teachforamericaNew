@@ -6,6 +6,7 @@ import './styles/index.scss'
 import Amplify from '@aws-amplify/core'
 import { Auth } from 'aws-amplify'
 import awsconfig from './aws-exports'
+import 'react-toastify/dist/ReactToastify.css'
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)

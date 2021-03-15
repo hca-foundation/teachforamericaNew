@@ -252,7 +252,7 @@ const StudentTable = ({
               <tbody>
                 <tr>
                   <td colSpan='10000' className='text-left'>
-                    * Tidak ada data
+                    data is loading...
                   </td>
                 </tr>
               </tbody>

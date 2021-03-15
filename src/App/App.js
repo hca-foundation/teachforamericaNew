@@ -13,9 +13,7 @@ import { API, Auth } from 'aws-amplify'
 // Amplify.configure(awsExports)
 
 const App = () => {
-  useEffect(async () => {
-    API.get('t4aApi', '/students/id').then(res => console.log(res))
-  }, [])
+  useEffect(async () => {}, [])
   return (
     <>
       <GlobalStateProvider>
