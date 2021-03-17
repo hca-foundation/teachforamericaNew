@@ -9,9 +9,33 @@ const StudentContainer = () => {
             {
                  Array.from(Array(numberShown).keys()).map((x, i) => <StudentForm key={i} studentIndex={x} />)
             }
-            <button className="btn btn-secondary mt-3" onClick={(e) => setNumberShown(numberShown + 1)}><i className="fas fa-plus mx-1"></i> Add Student</button>
+            <button
+                className="btn btn-secondary mt-3"
+                onClick={
+                    (e) => {
+                        e.preventDefault();
+                        setNumberShown(numberShown + 1);
+                    }
+                }
+            >
+                <i className="fas fa-plus mx-1"></i>
+                Add Student
+            </button>
             {
-                numberShown > 1 ? <button className="btn btn-secondary mx-3 mt-3" onClick={(e) => setNumberShown(numberShown - 1)}><i className="fas fa-minus mx-1"></i> Remove Student</button> : null
+                numberShown > 1
+                ?   <button
+                        className="btn btn-secondary mx-3 mt-3"
+                        onClick={
+                            (e) => {
+                                e.preventDefault();
+                                setNumberShown(numberShown - 1)
+                            }
+                        }
+                    >
+                        <i className="fas fa-minus mx-1"></i>
+                        Remove Student
+                    </button>
+                : null
             }
         </>
     );
