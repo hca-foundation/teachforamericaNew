@@ -123,7 +123,7 @@ const FormPage = () => {
         <StudentContainer />
         <SelfDeclarationForm />
         <Button
-          className='btn btn-dark col-3'
+          className='btn btn-primary col-3'
           onClick={() => handleSubmit(state.formData)}
         >
           Submit

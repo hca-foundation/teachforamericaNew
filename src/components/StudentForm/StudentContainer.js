@@ -10,7 +10,7 @@ const StudentContainer = () => {
                  Array.from(Array(numberShown).keys()).map((x, i) => <StudentForm key={i} studentIndex={x} />)
             }
             <button
-                className="btn btn-secondary mt-3"
+                className="btn btn-success mt-3"
                 onClick={
                     (e) => {
                         e.preventDefault();
@@ -24,7 +24,7 @@ const StudentContainer = () => {
             {
                 numberShown > 1
                 ?   <button
-                        className="btn btn-secondary mx-3 mt-3"
+                        className="btn btn-danger mx-3 mt-3"
                         onClick={
                             (e) => {
                                 e.preventDefault();

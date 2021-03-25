@@ -66,15 +66,9 @@ const StudentForm = ({ studentIndex }) => {
 
   return (
     <div className='StudentForm text-left py-4'>
-      <div className='d-flex justify-content-between align-items-center'>
+      <div className='d-flex justify-content-between align-items-center expand-collapse my-1' onClick={toggle}>
         <h5>Student {`${studentIndex + 1}`} Information</h5>
-        <Button
-          color='primary'
-          onClick={toggle}
-          style={{ marginBottom: '1rem' }}
-        >
-          {isOpen ? 'Collapse' : 'Expand'}
-        </Button>
+        <i class={`fas fa-chevron-right chevron-icon ${isOpen ? 'icon-rotate' : 'icon-start'}`}></i>
       </div>
       <Collapse isOpen={isOpen}>
         <div className='row'>

@@ -18,7 +18,7 @@ const GuardianContainer = () => {
             {
                 numberShown < 3 
                 ?   <button
-                        className="btn btn-dark mx-3 mt-3"
+                        className="btn btn-success mx-3 mt-3"
                         onClick={
                             (e) => {
                                 e.preventDefault();
@@ -34,7 +34,7 @@ const GuardianContainer = () => {
             {
                 numberShown > 1 
                 ?   <button
-                        className="btn btn-dark mx-3 mt-3"
+                        className="btn btn-danger mx-3 mt-3"
                         onClick={
                             (e) => {
                                 e.preventDefault(); 
