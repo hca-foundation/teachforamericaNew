@@ -32,7 +32,7 @@ const ParentGuardianForm = ({ guardianIndex }) => {
     <div className='ParentGuardianForm text-left py-4'>
       <div className='d-flex justify-content-between align-items-center expand-collapse my-1' onClick={toggle}>
         <h5>Parent/Guardian {`${guardianIndex + 1}`} Information</h5>
-        <i class={`fas fa-chevron-right chevron-icon ${isOpen ? 'icon-rotate' : 'icon-start'}`}></i>
+        <i className={`fas fa-chevron-right chevron-icon ${isOpen ? 'icon-rotate' : 'icon-start'}`}></i>
       </div>
       <Collapse isOpen={isOpen}>
         <div className='row'>

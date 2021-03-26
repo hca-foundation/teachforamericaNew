@@ -115,7 +115,7 @@ const FormPage = () => {
   return (
     <div className='Form col-6 mx-auto my-5 text-center'>
       <h1>Academy Student Registration: Grades K-8</h1>
-      <h4>
+      <h4 className="my-3">
         <em>All fields required unless noted optional</em>
       </h4>
       <Form>
