@@ -21,7 +21,7 @@ const App = () => {
           <Nav />
           <Switch>
             <Route path='/' exact component={HomePage} />
-            <Route path='/form' component={FormPage} />
+            {/* <Route path='/form' component={FormPage} /> */}
           </Switch>
         </Router>
       </GlobalStateProvider>

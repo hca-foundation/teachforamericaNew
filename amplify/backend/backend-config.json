@@ -1,69 +1,53 @@
 {
-    "auth": {
-        "teachforamerica2c3663c6": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [],
-            "customAuth": false
-        },
-        "userPoolGroups": {
-            "service": "Cognito-UserPool-Groups",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "auth",
-                    "resourceName": "teachforamerica2c3663c6",
-                    "attributes": [
-                        "UserPoolId",
-                        "AppClientIDWeb",
-                        "AppClientID",
-                        "IdentityPoolId"
-                    ]
-                }
-            ]
-        }
-    },
-    "storage": {
-        "t4aTable": {
-            "service": "DynamoDB",
-            "providerPlugin": "awscloudformation"
-        }
-    },
-    "function": {
-        "t4aFunction": {
-            "build": true,
-            "providerPlugin": "awscloudformation",
-            "service": "Lambda",
-            "dependsOn": [
-                {
-                    "category": "storage",
-                    "resourceName": "t4aTable",
-                    "attributes": [
-                        "Name",
-                        "Arn"
-                    ],
-                    "attributeEnvMap": {
-                        "Name": "TABLE_NAME",
-                        "Arn": "TABLE_ARN"
-                    }
-                }
-            ]
-        }
-    },
-    "api": {
-        "t4aApi": {
-            "service": "API Gateway",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "t4aFunction",
-                    "attributes": [
-                        "Name",
-                        "Arn"
-                    ]
-                }
-            ]
-        }
+  "auth": {
+    "teachforamericad974923a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
     }
+  },
+  "storage": {
+    "dynamod7b0a854": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "function": {
+    "teachforamerica936599da": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "dynamod7b0a854",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
+    }
+  },
+  "api": {
+    "restAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "teachforamerica936599da",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  }
 }

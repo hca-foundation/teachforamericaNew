@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "teachforamerica2c3663c6_identitypool_2c3663c6",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "teachf2c3663c6",
-    "userPoolName": "teachforamerica2c3663c6_userpool_2c3663c6",
+    "identityPoolName": "teachforamericad974923a_identitypool_d974923a",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "teachfd974923a",
+    "userPoolName": "teachforamericad974923a_userpool_d974923a",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,7 +20,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientGenerateSecret": true,
+    "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
         "email"
@@ -28,9 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "teachf2c3663c6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "teachfd974923a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "teachforamerica2c3663c6",
+    "sharedId": "d974923a",
+    "resourceName": "teachforamericad974923a",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -48,6 +49,12 @@
     "usernameAttributes": [
         "email"
     ],
+    "triggers": "{}",
     "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

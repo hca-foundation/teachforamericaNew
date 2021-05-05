@@ -1,5 +1,5 @@
 {
-    "tableName": "t4aTable",
+    "tableName": "teachers",
     "partitionKeyName": "id",
     "partitionKeyType": "S"
 }
