@@ -1,0 +1,125 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-teachforamerica-dev-11625-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-11625-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-11625-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
+      "UnauthRoleName": "amplify-teachforamerica-dev-11625-unauthRole",
+      "StackName": "amplify-teachforamerica-dev-11625",
+      "StackId": "arn:aws:cloudformation:us-east-1:891251766173:stack/amplify-teachforamerica-dev-11625/6e478cc0-a8b2-11eb-b269-0a4789a43cff",
+      "AmplifyAppId": "d5uu4ngmqjjq3",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    }
+  },
+  "auth": {
+    "teachforamericad974923a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/auth/teachforamericad974923a-cloudformation-template.yml",
+        "logicalId": "authteachforamericad974923a"
+      },
+      "lastPushTimeStamp": "2021-05-05T06:18:09.737Z",
+      "output": {
+        "UserPoolId": "us-east-1_ETiJOG458",
+        "AppClientIDWeb": "7rvq02tt0db1bhvm7pa6t1dc42",
+        "AppClientID": "78r0o4fbior5ocbrga4tjshffu",
+        "IdentityPoolId": "us-east-1:170b9125-211a-433c-92c0-378107cd46a6",
+        "IdentityPoolName": "teachforamericad974923a_identitypool_d974923a__dev",
+        "UserPoolName": "teachforamericad974923a_userpool_d974923a"
+      },
+      "lastPushDirHash": "9sJ06HfikglxGAAhEoNFAuQ1aPo="
+    }
+  },
+  "storage": {
+    "dynamod7b0a854": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/storage/dynamod7b0a854-cloudformation-template.json",
+        "logicalId": "storagedynamod7b0a854"
+      },
+      "lastPushTimeStamp": "2021-05-05T06:18:09.739Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:891251766173:table/teachers-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:891251766173:table/teachers-dev/stream/2021-04-29T13:38:33.784",
+        "PartitionKeyType": "S",
+        "Name": "teachers-dev"
+      },
+      "lastPushDirHash": "SEwJliBAWRa6KdxqHoCsYUicOic="
+    }
+  },
+  "function": {
+    "teachforamerica936599da": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "dynamod7b0a854",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2021-05-05T06:17:02.204Z",
+      "lastPackageTimeStamp": "2021-05-05T06:17:05.922Z",
+      "distZipFilename": "teachforamerica936599da-61594e39517836635334-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
+        "s3Key": "amplify-builds/teachforamerica936599da-61594e39517836635334-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/function/teachforamerica936599da-cloudformation-template.json",
+        "logicalId": "functionteachforamerica936599da"
+      },
+      "lastPushTimeStamp": "2021-05-05T06:18:09.746Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:891251766173:function:teachforamerica936599da-dev",
+        "Name": "teachforamerica936599da-dev",
+        "LambdaExecutionRole": "teachforamericaLambdaRole2de03828-dev"
+      },
+      "lastPushDirHash": "U0/KnTqaPdfLU7sJ49Ddvl0L6Cg="
+    }
+  },
+  "api": {
+    "restAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "teachforamerica936599da",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/api/restAPI-cloudformation-template.json",
+        "logicalId": "apirestAPI"
+      },
+      "lastPushTimeStamp": "2021-05-05T06:18:09.742Z",
+      "output": {
+        "ApiName": "restAPI",
+        "RootUrl": "https://6q53uyucbl.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "6q53uyucbl"
+      },
+      "lastPushDirHash": "xY4mwZAD8SJeUxeHeo8bZTwqDlc="
+    }
+  }
+}
