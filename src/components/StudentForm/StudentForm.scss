@@ -1,4 +1,14 @@
 .StudentForm {
     display: block;
     border-bottom: 1px solid grey;
+    .expand-collapse {
+        cursor: pointer;
+    }
+    .icon-start {
+        transition: transform, .5s, 
+    }
+    .icon-rotate {
+        transform: rotate(90deg);
+        transition: transform, .5s,  
+    }
 }
