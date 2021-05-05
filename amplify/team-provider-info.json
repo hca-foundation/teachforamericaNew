@@ -18,7 +18,7 @@
       "function": {
         "teachforamerica936599da": {
           "deploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
-          "s3Key": "amplify-builds/teachforamerica936599da-34384373396d33586d5a-build.zip"
+          "s3Key": "amplify-builds/teachforamerica936599da-61594e39517836635334-build.zip"
         }
       }
     }

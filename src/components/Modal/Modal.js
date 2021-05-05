@@ -17,19 +17,17 @@ const ModalComponent = ({
   setSelected
 }) => {
   const [message, setMessage] = useState('')
-
+  console.log('selected', selected)
   // array of the phone numbers to send to
-  const selectedStudentsValues = selected.map(
-    ({ values: { guardian1PhoneNumber: phoneNumber } }) => {
-      const formattedNumber = `+1${phoneNumber.replace(/-/g, '')}`
-      return formattedNumber
-    }
-  )
+  const selectedValues = selected.map(({ values: { phone: phoneNumber } }) => {
+    const formattedNumber = `+1${phoneNumber.replace(/-/g, '')}`
+    return formattedNumber
+  })
   const sendText = async () => {
     const API_ENDPOINT =
       'https://9hxir29w6i.execute-api.us-east-1.amazonaws.com/dev/api/sendText'
     const data = JSON.stringify({
-      phoneNumbers: selectedStudentsValues,
+      phoneNumbers: selectedValues,
       message
     })
     try {
@@ -71,20 +69,9 @@ const ModalComponent = ({
         </ModalFooter>
         <div>
           {selected.length > 0 ? (
-            selected.map(
-              ({
-                id,
-                values: {
-                  studentFirstName,
-                  studentLastName,
-                  guardian1PhoneNumber: phoneNumber
-                }
-              }) => (
-                <p
-                  key={id}
-                >{`${studentLastName}, ${studentFirstName}: ${phoneNumber}`}</p>
-              )
-            )
+            selected.map(({ id, name, phone }) => (
+              <p key={id}>{`${name}: ${phone}`}</p>
+            ))
           ) : (
             <p>None selected</p>
           )}

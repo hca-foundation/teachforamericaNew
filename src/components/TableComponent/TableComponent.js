@@ -1,29 +1,71 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Container, Button } from 'reactstrap'
 import StudentTable from '../StudentTable/StudentTable'
-
+import TeacherTable from '../TeacherTable/TeacherTable'
+import { v4 as uuidv4 } from 'uuid'
 import './TableComponent.scss'
 import Modal from '../Modal/Modal'
-import columns from './columns'
+import studentColumns from './studentColumns'
+import teacherColumns from './teacherColumns'
 import { API, Auth } from 'aws-amplify'
 import { CSVLink, CSVDownload } from 'react-csv'
 import { ToastContainer, toast } from 'react-toastify'
 const TableComponent = () => {
   const [students, setStudents] = useState([])
+  const [teachers, setTeachers] = useState([])
   const [selected, setSelected] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  useEffect(async () => {
-    const apiName = 't4aApi'
-    const path = '/students/id'
-    API.get(apiName, path).then(res => setStudents(res))
+  // useEffect(async () => {
+  //   const apiName = 't4aApi'
+  //   const path = '/students/id'
+  //   API.get(apiName, path).then(res => setStudents(res))
+  // }, [])
+  useEffect(() => {
+    console.log('here', API)
+    const apiName = 'restAPI'
+    const path = '/teachers/id'
+    API.get(apiName, path)
+      .then(res => {
+        setTeachers(res)
+      })
+      .catch(err => console.log('fetch err', err))
   }, [])
+
+  const addTeacher = teacher => {
+    const {
+      name,
+      contentArea,
+      grade,
+      MTLD,
+      phone,
+      school,
+      summerCoach,
+      city
+    } = teacher
+    const apiName = 'restAPI'
+    const path = '/teachers/'
+    API.post(apiName, path, {
+      body: {
+        id: uuidv4(),
+        name,
+        contentArea,
+        grade,
+        MTLD,
+        phone,
+        school,
+        summerCoach,
+        city
+      }
+    }).catch(err => console.log('fetch err', err))
+  }
 
   const messageSent = msg => {
     setIsModalOpen(false)
     setSelected([])
     toast(msg)
   }
+  console.log('teachers', teachers)
   return (
     <>
       {isModalOpen && (
@@ -46,17 +88,17 @@ const TableComponent = () => {
             size='lg'
             onClick={() => setIsModalOpen(true)}
           >
-            Message Selected Students ({selected.length})
+            Message Selected ({selected.length})
           </Button>
         </div>
       </aside>
       <Container className='themed-container' fluid={true}>
         <div>
-          <StudentTable
+          <TeacherTable
             selected={selected}
             setSelected={setSelected}
-            columns={columns}
-            data={students}
+            columns={teacherColumns}
+            data={teachers}
             loading={false}
           />
         </div>
