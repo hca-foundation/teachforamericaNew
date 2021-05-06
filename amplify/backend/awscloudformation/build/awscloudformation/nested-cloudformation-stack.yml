@@ -153,6 +153,51 @@
         }
       }
     },
+    "authuserPoolGroups": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/auth/template.json",
+        "Parameters": {
+          "AuthRoleArn": {
+            "Fn::GetAtt": [
+              "AuthRole",
+              "Arn"
+            ]
+          },
+          "UnauthRoleArn": {
+            "Fn::GetAtt": [
+              "UnauthRole",
+              "Arn"
+            ]
+          },
+          "authteachforamericad974923aUserPoolId": {
+            "Fn::GetAtt": [
+              "authteachforamericad974923a",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "authteachforamericad974923aAppClientIDWeb": {
+            "Fn::GetAtt": [
+              "authteachforamericad974923a",
+              "Outputs.AppClientIDWeb"
+            ]
+          },
+          "authteachforamericad974923aAppClientID": {
+            "Fn::GetAtt": [
+              "authteachforamericad974923a",
+              "Outputs.AppClientID"
+            ]
+          },
+          "authteachforamericad974923aIdentityPoolId": {
+            "Fn::GetAtt": [
+              "authteachforamericad974923a",
+              "Outputs.IdentityPoolId"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
     "storagedynamod7b0a854": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
