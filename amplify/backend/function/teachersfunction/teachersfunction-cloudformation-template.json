@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "storagedynamod7b0a854Name": {
+    "storageteachersdbName": {
       "Type": "String",
-      "Default": "storagedynamod7b0a854Name"
+      "Default": "storageteachersdbName"
     },
-    "storagedynamod7b0a854Arn": {
+    "storageteachersdbArn": {
       "Type": "String",
-      "Default": "storagedynamod7b0a854Arn"
+      "Default": "storageteachersdbArn"
     }
   },
   "Conditions": {
@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "teachforamerica936599da",
+            "teachersfunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "teachforamerica936599da",
+                  "teachersfunction",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "teachforamericaLambdaRole2de03828",
+            "teachforamericaLambdaRole32b983d2",
             {
               "Fn::Join": [
                 "",
                 [
-                  "teachforamericaLambdaRole2de03828",
+                  "teachforamericaLambdaRole32b983d2",
                   "-",
                   {
                     "Ref": "env"
@@ -182,14 +182,14 @@
               ],
               "Resource": [
                 {
-                  "Ref": "storagedynamod7b0a854Arn"
+                  "Ref": "storageteachersdbArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storagedynamod7b0a854Arn"
+                        "Ref": "storageteachersdbArn"
                       },
                       "index/*"
                     ]

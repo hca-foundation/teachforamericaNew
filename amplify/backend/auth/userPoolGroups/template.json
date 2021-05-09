@@ -1,23 +1,23 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authteachforamericad974923aUserPoolId": {
+        "authteachforamerica8407bbc0UserPoolId": {
             "Type": "String",
-            "Default": "authteachforamericad974923aUserPoolId"
+            "Default": "authteachforamerica8407bbc0UserPoolId"
         },
         
-        "authteachforamericad974923aIdentityPoolId": {
+        "authteachforamerica8407bbc0IdentityPoolId": {
             "Type": "String",
-            "Default": "authteachforamericad974923aIdentityPoolId"
+            "Default": "authteachforamerica8407bbc0IdentityPoolId"
         },
         
-        "authteachforamericad974923aAppClientID": {
+        "authteachforamerica8407bbc0AppClientID": {
             "Type": "String",
-            "Default": "authteachforamericad974923aAppClientID"
+            "Default": "authteachforamerica8407bbc0AppClientID"
         },
-        "authteachforamericad974923aAppClientIDWeb": {
+        "authteachforamerica8407bbc0AppClientIDWeb": {
             "Type": "String",
-            "Default": "authteachforamericad974923aAppClientIDWeb"
+            "Default": "authteachforamerica8407bbc0AppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -55,7 +55,7 @@
               },
               
               "UserPoolId" : {
-                "Ref": "authteachforamericad974923aUserPoolId"
+                "Ref": "authteachforamerica8407bbc0UserPoolId"
               }
             }
         },
@@ -68,7 +68,7 @@
                         "",
                         [
                           {
-                            "Ref": "authteachforamericad974923aUserPoolId"
+                            "Ref": "authteachforamerica8407bbc0UserPoolId"
                           },
                           "-adminGroupRole"
                         ]
@@ -85,7 +85,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authteachforamericad974923aIdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authteachforamerica8407bbc0IdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -111,7 +111,7 @@
                                 "",
                                 [
 
-                                  "teachforamericad974923a",
+                                  "teachforamerica8407bbc0",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -270,16 +270,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authteachforamericad974923aIdentityPoolId"
+                    "Ref": "authteachforamerica8407bbc0IdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authteachforamericad974923aUserPoolId"
+                    "Ref": "authteachforamerica8407bbc0UserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authteachforamericad974923aAppClientIDWeb"
+                    "Ref": "authteachforamerica8407bbc0AppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authteachforamericad974923aAppClientID"
+                    "Ref": "authteachforamerica8407bbc0AppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"

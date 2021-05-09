@@ -3,22 +3,22 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:170b9125-211a-433c-92c0-378107cd46a6",
+    "aws_cognito_identity_pool_id": "us-east-1:a5af299e-4594-4d42-8f43-01a0eb849e79",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_ETiJOG458",
-    "aws_user_pools_web_client_id": "7rvq02tt0db1bhvm7pa6t1dc42",
+    "aws_user_pools_id": "us-east-1_Dr43SFDZq",
+    "aws_user_pools_web_client_id": "49r1j3au6cos8jrat2747a7dsn",
     "oauth": {},
     "aws_dynamodb_all_tables_region": "us-east-1",
     "aws_dynamodb_table_schemas": [
         {
-            "tableName": "teachers-dev",
+            "tableName": "teachersdb-dev",
             "region": "us-east-1"
         }
     ],
     "aws_cloud_logic_custom": [
         {
-            "name": "restAPI",
-            "endpoint": "https://6q53uyucbl.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "teachersapi",
+            "endpoint": "https://p9bw7z60z7.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ]

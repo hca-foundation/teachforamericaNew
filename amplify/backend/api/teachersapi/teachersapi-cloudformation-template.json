@@ -8,15 +8,15 @@
         },
     
     
-          "functionteachforamerica936599daName": {
+          "functionteachersfunctionName": {
             "Type": "String",
-            "Default": "functionteachforamerica936599daName"
+            "Default": "functionteachersfunctionName"
           },
 
           
-          "functionteachforamerica936599daArn": {
+          "functionteachersfunctionArn": {
             "Type": "String",
-            "Default": "functionteachforamerica936599daArn"
+            "Default": "functionteachersfunctionArn"
           }
 
           
@@ -37,16 +37,16 @@
         
         
         
-      "restAPI": {
+      "teachersapi": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "restAPI",
+          "Name": "teachersapi",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "restAPI"
+              "title": "teachersapi"
             },
             "host": {
                 "Fn::Join": [
@@ -174,7 +174,7 @@
                             
                             {
 
-                                "Ref": "functionteachforamerica936599daArn"
+                                "Ref": "functionteachersfunctionArn"
                             },
                             
                             "/invocations"
@@ -279,7 +279,7 @@
                           
                           {
 
-                            "Ref": "functionteachforamerica936599daArn"
+                            "Ref": "functionteachersfunctionArn"
                           },
                           
                           "/invocations"
@@ -336,12 +336,12 @@
       
         
 
-        "functionteachforamerica936599daPermissionrestAPI": {
+        "functionteachersfunctionPermissionteachersapi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionteachforamerica936599daName"
+                        "Ref":  "functionteachersfunctionName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -360,7 +360,7 @@
                             },
                             ":",
                             {
-                                "Ref": "restAPI"
+                                "Ref": "teachersapi"
                             },
                             "/*/*/*"
                         ]
@@ -371,7 +371,7 @@
         
         
 
-      "DeploymentAPIGWrestAPI1a8d1712": {
+      "DeploymentAPIGWteachersapi": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -385,7 +385,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "restAPI"
+            "Ref": "teachersapi"
           }
         }
       }
@@ -393,15 +393,15 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "restAPI"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "teachersapi"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "restAPI"
+          "Value": "teachersapi"
         },
         "ApiId": {
           "Description": "API ID (prefix of API URL)",
-          "Value": {"Ref": "restAPI"}
+          "Value": {"Ref": "teachersapi"}
         }
     }
   }

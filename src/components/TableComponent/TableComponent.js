@@ -16,16 +16,11 @@ const TableComponent = () => {
   const [selected, setSelected] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // useEffect(async () => {
-  //   const apiName = 't4aApi'
-  //   const path = '/students/id'
-  //   API.get(apiName, path).then(res => setStudents(res))
-  // }, [])
-  useEffect(() => {
+  useEffect(async () => {
     console.log('here', API)
-    const apiName = 'restAPI'
+    const apiName = 'teachersapi'
     const path = '/teachers/id'
-    API.get(apiName, path)
+    await API.get(apiName, path)
       .then(res => {
         setTeachers(res)
       })
@@ -43,7 +38,7 @@ const TableComponent = () => {
       summerCoach,
       city
     } = teacher
-    const apiName = 'restAPI'
+    const apiName = 'teachersapi'
     const path = '/teachers/'
     API.post(apiName, path, {
       body: {

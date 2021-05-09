@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './HomePage.scss'
 import TableComponent from '../TableComponent/TableComponent'
 
@@ -14,4 +14,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage;
+export default HomePage
