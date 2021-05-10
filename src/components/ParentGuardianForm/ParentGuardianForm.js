@@ -1,51 +1,64 @@
-import React, { useEffect, useState } from 'react'
-
-import studentData from '../../helpers/data/studentData'
-
+import React, { useContext, useEffect, useState } from 'react';
+import { Collapse, Button } from 'reactstrap';
+import { v4 as uuidv4 } from 'uuid';
+import { setFormDataAction } from '../../state/globalActions';
+import { GlobalStateContext } from '../../state/globalStore';
 import './ParentGuardianForm.scss'
 
-const ParentGuardianForm = ({ setInput, formState }) => {
-  const [students, setStudents] = useState([])
+const ParentGuardianForm = ({ guardianIndex }) => {
+  const { dispatch, state } = useContext(GlobalStateContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    studentData
-      .fetchStudents()
-      .then(allStudents => {
-        setStudents(allStudents)
-      })
-      .catch(err => console.error('There was an error fetching students:', err))
-  }, [])
+    dispatch(setFormDataAction(state.formData));
+  }, [dispatch, state.formData]);
 
-  console.log('students', students)
+  const toggle = () => setIsOpen(!isOpen);
+
+  const updateGuardian = (index, key, value) => {
+    const newState = { ...state.formData };
+    let currentGuardian = newState.guardians[index];
+    if (currentGuardian === undefined) {
+      currentGuardian = { ...newState.guardians[index], id: uuidv4() };
+      currentGuardian[key] = value;
+      newState.guardians[index] = currentGuardian;
+    } else {
+      currentGuardian[key] = value;
+      newState.guardians[index] = currentGuardian;
+    }
+    dispatch(setFormDataAction(newState));
+  };
+
   return (
     <div className='ParentGuardianForm text-left py-4'>
-      <form>
-        <h5>Parent/Guardian Information</h5>
+      <div className="d-flex justify-content-between align-items-center">
+        <h5>Parent/Guardian {`${guardianIndex + 1}`} Information</h5>
+        <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>{ isOpen ? 'Collapse' : 'Expand' }</Button>
+      </div>
+      <Collapse isOpen={isOpen}>
         <div className='row'>
           <div className='form-group col-6'>
-            <label htmlFor='parentGuardianFirstName'>
+            <label htmlFor='parentFirstName'>
               Parent/Guardian First Name
             </label>
             <input
-              onChange={e => setInput('parentFirstName', e.target.value)}
-              value={formState.parentFirstName}
+              onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
               type='text'
               className='form-control'
-              id='parentGuardianFirstName'
+              id='parentFirstName'
               maxLength='50'
               required
             />
           </div>
           <div className='form-group col-6'>
-            <label htmlFor='parentGuardianLastName'>
+            <label htmlFor='parentLastName'>
               Parent/Guardian Last Name
             </label>
             <input
-              onChange={e => setInput('parentLastName', e.target.value)}
-              value={formState.parentLastName}
+              onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
               type='text'
               className='form-control'
-              id='parentGuardianLastName'
+              id='parentLastName'
               maxLength='50'
               required
             />
@@ -55,13 +68,12 @@ const ParentGuardianForm = ({ setInput, formState }) => {
           <div className='form-group col-6'>
             <label htmlFor='phoneNumber'>Phone Number</label>
             <input
-              onChange={e => setInput('phoneNumber', e.target.value)}
-              value={formState.phoneNumber}
+              onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
               type='tel'
               className='form-control'
               id='phoneNumber'
               placeholder='(xxx)xxx-xxxx'
-              maxLength='10'
+              maxLength='12'
               pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
               required
             />
@@ -71,8 +83,7 @@ const ParentGuardianForm = ({ setInput, formState }) => {
           <div className='form-group col-12'>
             <label htmlFor='email'>Email (optional)</label>
             <input
-              onChange={e => setInput('email', e.target.value)}
-              value={formState.email}
+              onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
               type='email'
               className='form-control'
               id='email'
@@ -80,7 +91,19 @@ const ParentGuardianForm = ({ setInput, formState }) => {
             />
           </div>
         </div>
-      </form>
+        <div className="row">
+              <div className="form-group col-12">
+                  <label htmlFor="relationship">What is your relationship to the student(s)? (optional)</label>
+                  <input
+                      onChange={(e) => updateGuardian(guardianIndex, e.target.id, e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="relationship"
+                      maxLength="50"
+                  />
+              </div>
+          </div>
+      </Collapse>
     </div>
   )
 }

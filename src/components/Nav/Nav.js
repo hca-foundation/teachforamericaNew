@@ -1,21 +1,22 @@
 import React from 'react';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
 import './Nav.scss';
 
 const Nav = () => (
     <div className="Nav">
-        <nav className="navbar navbar-light nav-main py-0 ml-0">
-            <div className="row bg-light">
-                <p className="navbar-brand mb-0 h1 bg-light p-3 logo">
-                    TEACH
-                    <span className="for">
-                        FOR
-                    </span>
-                    AMERICA
-                </p>
-            </div>
-        </nav>
+      <nav className='home-header'>
+        <div className='logo-wrapper'>
+          {/* <div className='logo'>
+            TEACH<div id='logo-for'>FOR</div>AMERICA
+          </div> */}
+          <img className="logo-img" src="https://www.teachforamerica.org/themes/custom/polaris/assets/img/logo.svg" alt="Teach For America"/>
+        </div>
+        <div className='signout-wrapper'>
+          <AmplifySignOut />
+        </div>
+      </nav>
     </div>
 );
 
-export default Nav;
+export default withAuthenticator(Nav);
