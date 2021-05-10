@@ -71,7 +71,7 @@
     "APIGatewayAuthStack": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
         "Parameters": {
           "authRoleName": {
             "Ref": "AuthRoleName"
@@ -80,24 +80,84 @@
             "Ref": "UnauthRoleName"
           },
           "env": "dev",
-          "restAPI": {
+          "teachersapi": {
             "Fn::GetAtt": [
-              "apirestAPI",
+              "apiteachersapi",
+              "Outputs.ApiId"
+            ]
+          },
+          "AdminQueries": {
+            "Fn::GetAtt": [
+              "apiAdminQueries",
               "Outputs.ApiId"
             ]
           }
         }
       }
     },
-    "authteachforamericad974923a": {
+    "functionteachforamerica8407bbc0PostConfirmation": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/auth/teachforamericad974923a-cloudformation-template.yml",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/function/teachforamerica8407bbc0PostConfirmation-cloudformation-template.json",
         "Parameters": {
-          "identityPoolName": "teachforamericad974923a_identitypool_d974923a",
+          "modules": "add-to-group",
+          "resourceName": "teachforamerica8407bbc0PostConfirmation",
+          "GROUP": "admin",
+          "deploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+          "s3Key": "amplify-builds/teachforamerica8407bbc0PostConfirmation-6b7145747564664c5675-build.zip",
+          "env": "dev"
+        }
+      }
+    },
+    "functionteachersfunction": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/function/teachersfunction-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+          "s3Key": "amplify-builds/teachersfunction-4b6147636d704b38546c-build.zip",
+          "storageteachersdbName": {
+            "Fn::GetAtt": [
+              "storageteachersdb",
+              "Outputs.Name"
+            ]
+          },
+          "storageteachersdbArn": {
+            "Fn::GetAtt": [
+              "storageteachersdb",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functionAdminQueries7b492c83": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/function/AdminQueries7b492c83-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+          "s3Key": "amplify-builds/AdminQueries7b492c83-67794261486b6d636847-build.zip",
+          "authteachforamerica8407bbc0UserPoolId": {
+            "Fn::GetAtt": [
+              "authteachforamerica8407bbc0",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "authteachforamerica8407bbc0": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/auth/teachforamerica8407bbc0-cloudformation-template.yml",
+        "Parameters": {
+          "identityPoolName": "teachforAmerica",
           "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "teachfd974923a",
-          "userPoolName": "teachforamericad974923a_userpool_d974923a",
+          "resourceNameTruncated": "teachf8407bbc0",
+          "userPoolName": "teachforamerica8407bbc0_userpool_8407bbc0",
           "autoVerifiedAttributes": "email",
           "mfaConfiguration": "OFF",
           "mfaTypes": "SMS Text Message",
@@ -110,13 +170,13 @@
           "passwordPolicyCharacters": "",
           "requiredAttributes": "email",
           "userpoolClientGenerateSecret": false,
-          "userpoolClientRefreshTokenValidity": 30,
+          "userpoolClientRefreshTokenValidity": "30",
           "userpoolClientWriteAttributes": "email",
           "userpoolClientReadAttributes": "email",
-          "userpoolClientLambdaRole": "teachfd974923a_userpoolclient_lambda_role",
+          "userpoolClientLambdaRole": "teachf8407bbc0_userpoolclient_lambda_role",
           "userpoolClientSetAttributes": false,
-          "sharedId": "d974923a",
-          "resourceName": "teachforamericad974923a",
+          "sharedId": "8407bbc0",
+          "resourceName": "teachforamerica8407bbc0",
           "authSelections": "identityPoolAndUserPool",
           "authRoleArn": {
             "Fn::GetAtt": [
@@ -130,48 +190,110 @@
               "Arn"
             ]
           },
-          "useDefault": "default",
-          "usernameAttributes": "email",
-          "triggers": "{}",
-          "userPoolGroupList": "",
+          "useDefault": "manual",
+          "triggers": "{\n  \"PostConfirmation\": [\n    \"add-to-group\"\n  ]\n}",
+          "userPoolGroupList": "adminUser",
           "serviceName": "Cognito",
           "parentStack": {
             "Ref": "AWS::StackId"
           },
-          "permissions": "",
-          "dependsOn": "",
+          "permissions": "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}",
+          "dependsOn": "[object Object]",
+          "userPoolGroups": true,
+          "adminQueries": true,
+          "hostedUI": false,
+          "adminQueryGroup": "adminUser",
+          "authProviders": "",
+          "thirdPartyAuth": false,
+          "functionteachforamerica8407bbc0PostConfirmationArn": {
+            "Fn::GetAtt": [
+              "functionteachforamerica8407bbc0PostConfirmation",
+              "Outputs.Arn"
+            ]
+          },
+          "functionteachforamerica8407bbc0PostConfirmationName": {
+            "Fn::GetAtt": [
+              "functionteachforamerica8407bbc0PostConfirmation",
+              "Outputs.Name"
+            ]
+          },
           "env": "dev"
         }
       }
     },
-    "storagedynamod7b0a854": {
+    "authuserPoolGroups": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/storage/dynamod7b0a854-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/auth/template.json",
         "Parameters": {
-          "tableName": "teachers",
+          "AuthRoleArn": {
+            "Fn::GetAtt": [
+              "AuthRole",
+              "Arn"
+            ]
+          },
+          "UnauthRoleArn": {
+            "Fn::GetAtt": [
+              "UnauthRole",
+              "Arn"
+            ]
+          },
+          "authteachforamerica8407bbc0UserPoolId": {
+            "Fn::GetAtt": [
+              "authteachforamerica8407bbc0",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "authteachforamerica8407bbc0AppClientIDWeb": {
+            "Fn::GetAtt": [
+              "authteachforamerica8407bbc0",
+              "Outputs.AppClientIDWeb"
+            ]
+          },
+          "authteachforamerica8407bbc0AppClientID": {
+            "Fn::GetAtt": [
+              "authteachforamerica8407bbc0",
+              "Outputs.AppClientID"
+            ]
+          },
+          "authteachforamerica8407bbc0IdentityPoolId": {
+            "Fn::GetAtt": [
+              "authteachforamerica8407bbc0",
+              "Outputs.IdentityPoolId"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "storageteachersdb": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/storage/teachersdb-cloudformation-template.json",
+        "Parameters": {
+          "tableName": "teachersdb",
           "partitionKeyName": "id",
           "partitionKeyType": "S",
+          "sortKeyName": "name",
+          "sortKeyType": "S",
           "env": "dev"
         }
       }
     },
-    "functionteachforamerica936599da": {
+    "apiteachersapi": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/function/teachforamerica936599da-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/api/teachersapi-cloudformation-template.json",
         "Parameters": {
-          "deploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
-          "s3Key": "amplify-builds/teachforamerica936599da-61594e39517836635334-build.zip",
-          "storagedynamod7b0a854Name": {
+          "functionteachersfunctionName": {
             "Fn::GetAtt": [
-              "storagedynamod7b0a854",
+              "functionteachersfunction",
               "Outputs.Name"
             ]
           },
-          "storagedynamod7b0a854Arn": {
+          "functionteachersfunctionArn": {
             "Fn::GetAtt": [
-              "storagedynamod7b0a854",
+              "functionteachersfunction",
               "Outputs.Arn"
             ]
           },
@@ -179,21 +301,33 @@
         }
       }
     },
-    "apirestAPI": {
+    "apiAdminQueries": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-11625-deployment/amplify-cfn-templates/api/restAPI-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-teachforamerica-dev-234744-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
         "Parameters": {
-          "functionteachforamerica936599daName": {
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "authteachforamerica8407bbc0UserPoolId": {
             "Fn::GetAtt": [
-              "functionteachforamerica936599da",
-              "Outputs.Name"
+              "authteachforamerica8407bbc0",
+              "Outputs.UserPoolId"
             ]
           },
-          "functionteachforamerica936599daArn": {
+          "functionAdminQueries7b492c83Arn": {
             "Fn::GetAtt": [
-              "functionteachforamerica936599da",
+              "functionAdminQueries7b492c83",
               "Outputs.Arn"
+            ]
+          },
+          "functionAdminQueries7b492c83Name": {
+            "Fn::GetAtt": [
+              "functionAdminQueries7b492c83",
+              "Outputs.Name"
             ]
           },
           "env": "dev"
@@ -204,7 +338,7 @@
       "DependsOn": [
         "AuthRole",
         "UnauthRole",
-        "authteachforamericad974923a"
+        "authteachforamerica8407bbc0"
       ],
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -287,7 +421,7 @@
         },
         "idpId": {
           "Fn::GetAtt": [
-            "authteachforamericad974923a",
+            "authteachforamerica8407bbc0",
             "Outputs.IdentityPoolId"
           ]
         },

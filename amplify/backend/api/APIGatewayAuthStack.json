@@ -11,7 +11,7 @@
     "env": {
       "Type": "String"
     },
-    "restAPI": {
+    "teachersapi": {
       "Type": "String"
     }
   },
@@ -52,7 +52,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -82,7 +82,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -112,7 +112,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -142,7 +142,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -172,7 +172,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -202,7 +202,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -232,7 +232,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -262,7 +262,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -292,7 +292,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {
@@ -322,7 +322,7 @@
                       },
                       ":",
                       {
-                        "Ref": "restAPI"
+                        "Ref": "teachersapi"
                       },
                       "/",
                       {

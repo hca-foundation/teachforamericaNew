@@ -1,0 +1,42 @@
+{
+  "paths": [
+    {
+      "name": "/teachers",
+      "lambdaFunction": "teachersfunction",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/POST",
+          "/GET",
+          "/PUT",
+          "/PATCH",
+          "/DELETE"
+        ]
+      },
+      "policyResourceName": "/teachers"
+    }
+  ],
+  "resourceName": "teachersapi",
+  "apiName": "teachersapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "teachersfunction"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-teachforamerica-dev-234744-authRole",
+    "unAuthRoleName": "amplify-teachforamerica-dev-234744-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "teachersfunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

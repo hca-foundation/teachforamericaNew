@@ -1,25 +1,30 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-teachforamerica-dev-11625-authRole",
-      "UnauthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-11625-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-11625-authRole",
+      "AuthRoleName": "amplify-teachforamerica-dev-234744-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-234744-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891251766173:role/amplify-teachforamerica-dev-234744-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
-      "UnauthRoleName": "amplify-teachforamerica-dev-11625-unauthRole",
-      "StackName": "amplify-teachforamerica-dev-11625",
-      "StackId": "arn:aws:cloudformation:us-east-1:891251766173:stack/amplify-teachforamerica-dev-11625/6e478cc0-a8b2-11eb-b269-0a4789a43cff",
-      "AmplifyAppId": "d5uu4ngmqjjq3"
+      "DeploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+      "UnauthRoleName": "amplify-teachforamerica-dev-234744-unauthRole",
+      "StackName": "amplify-teachforamerica-dev-234744",
+      "StackId": "arn:aws:cloudformation:us-east-1:891251766173:stack/amplify-teachforamerica-dev-234744/b32d1cc0-b081-11eb-a52f-1245efb4d2e3",
+      "AmplifyAppId": "d37tympr1l9tk1"
     },
     "categories": {
-      "auth": {
-        "teachforamericad974923a": {}
-      },
       "function": {
-        "teachforamerica936599da": {
-          "deploymentBucketName": "amplify-teachforamerica-dev-11625-deployment",
-          "s3Key": "amplify-builds/teachforamerica936599da-61594e39517836635334-build.zip"
+        "teachforamerica8407bbc0PostConfirmation": {
+          "GROUP": "admin",
+          "deploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+          "s3Key": "amplify-builds/teachforamerica8407bbc0PostConfirmation-6b7145747564664c5675-build.zip"
+        },
+        "teachersfunction": {
+          "deploymentBucketName": "amplify-teachforamerica-dev-234744-deployment",
+          "s3Key": "amplify-builds/teachersfunction-4b6147636d704b38546c-build.zip"
         }
+      },
+      "auth": {
+        "teachforamerica8407bbc0": {}
       }
     }
   }
